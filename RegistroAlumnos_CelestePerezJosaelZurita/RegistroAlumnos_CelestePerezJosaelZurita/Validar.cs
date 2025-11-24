@@ -75,7 +75,7 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
             return true;
         }
 
-        // ========= VALIDACIÓN DEL FORMATO DE CÉDULA PANAMEÑA =========
+        //VALIDACIÓN DEL FORMATO DE CÉDULA PANAMEÑA 
         private bool CedulaPanameniaValida(string cedula)
         {
             // Provincias 1–13 | Tomo 1–4 dígitos | Asiento 1–4 dígitos
