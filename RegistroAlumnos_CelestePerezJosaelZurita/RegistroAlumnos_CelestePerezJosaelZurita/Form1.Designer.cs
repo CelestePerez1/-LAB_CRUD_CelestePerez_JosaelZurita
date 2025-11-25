@@ -68,12 +68,16 @@
             label2 = new Label();
             panel3 = new Panel();
             button1 = new Button();
+            panel7 = new Panel();
+            txtBuscar = new TextBox();
+            btnBuscar = new Button();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
             panel6.SuspendLayout();
             panel5.SuspendLayout();
             panel3.SuspendLayout();
+            panel7.SuspendLayout();
             SuspendLayout();
             // 
             // textUser
@@ -86,7 +90,7 @@
             // 
             // textCon2
             // 
-            textCon2.Location = new Point(347, 170);
+            textCon2.Location = new Point(309, 163);
             textCon2.MaxLength = 12;
             textCon2.Name = "textCon2";
             textCon2.Size = new Size(226, 27);
@@ -96,7 +100,7 @@
             // 
             label8.AutoSize = true;
             label8.BackColor = Color.White;
-            label8.Location = new Point(347, 138);
+            label8.Location = new Point(309, 131);
             label8.Name = "label8";
             label8.Size = new Size(160, 20);
             label8.TabIndex = 15;
@@ -106,7 +110,7 @@
             // 
             label9.AutoSize = true;
             label9.BackColor = Color.White;
-            label9.Location = new Point(26, 138);
+            label9.Location = new Point(26, 131);
             label9.Name = "label9";
             label9.Size = new Size(92, 20);
             label9.TabIndex = 13;
@@ -116,7 +120,7 @@
             // 
             check1.AutoSize = true;
             check1.BackColor = Color.White;
-            check1.Location = new Point(26, 234);
+            check1.Location = new Point(26, 219);
             check1.Name = "check1";
             check1.Size = new Size(337, 24);
             check1.TabIndex = 7;
@@ -126,7 +130,7 @@
             // btnGua1
             // 
             btnGua1.BackColor = Color.FromArgb(255, 255, 128);
-            btnGua1.Location = new Point(517, 262);
+            btnGua1.Location = new Point(479, 244);
             btnGua1.Name = "btnGua1";
             btnGua1.Size = new Size(142, 36);
             btnGua1.TabIndex = 4;
@@ -148,10 +152,10 @@
             // listBox1
             // 
             listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(179, 949);
+            listBox1.Location = new Point(25, 86);
             listBox1.Name = "listBox1";
             listBox1.ScrollAlwaysVisible = true;
-            listBox1.Size = new Size(643, 64);
+            listBox1.Size = new Size(1208, 84);
             listBox1.TabIndex = 88;
             listBox1.Click += listBox1_Click;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
@@ -162,9 +166,10 @@
             panel1.BackColor = Color.White;
             panel1.Controls.Add(panel4);
             panel1.Controls.Add(label10);
-            panel1.Location = new Point(155, 842);
+            panel1.Controls.Add(listBox1);
+            panel1.Location = new Point(32, 533);
             panel1.Name = "panel1";
-            panel1.Size = new Size(696, 198);
+            panel1.Size = new Size(1266, 198);
             panel1.TabIndex = 26;
             // 
             // panel4
@@ -172,15 +177,15 @@
             panel4.BackColor = Color.White;
             panel4.Controls.Add(txtContAlumno);
             panel4.Controls.Add(lblEST);
-            panel4.Location = new Point(24, 43);
+            panel4.Location = new Point(24, 39);
             panel4.Name = "panel4";
-            panel4.Size = new Size(643, 41);
+            panel4.Size = new Size(1209, 41);
             panel4.TabIndex = 27;
             // 
             // txtContAlumno
             // 
             txtContAlumno.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtContAlumno.Location = new Point(361, 11);
+            txtContAlumno.Location = new Point(649, 9);
             txtContAlumno.Name = "txtContAlumno";
             txtContAlumno.ReadOnly = true;
             txtContAlumno.Size = new Size(67, 27);
@@ -190,7 +195,7 @@
             // lblEST
             // 
             lblEST.AutoSize = true;
-            lblEST.Location = new Point(227, 14);
+            lblEST.Location = new Point(515, 12);
             lblEST.Name = "lblEST";
             lblEST.Size = new Size(128, 20);
             lblEST.TabIndex = 28;
@@ -209,16 +214,16 @@
             panel2.Controls.Add(textUser);
             panel2.Controls.Add(label8);
             panel2.Controls.Add(label9);
-            panel2.Location = new Point(155, 496);
+            panel2.Location = new Point(668, 220);
             panel2.Name = "panel2";
-            panel2.Size = new Size(696, 321);
+            panel2.Size = new Size(630, 287);
             panel2.TabIndex = 6;
             // 
             // check2
             // 
             check2.AutoSize = true;
             check2.BackColor = Color.White;
-            check2.Location = new Point(26, 264);
+            check2.Location = new Point(26, 249);
             check2.Name = "check2";
             check2.Size = new Size(180, 24);
             check2.TabIndex = 3;
@@ -248,7 +253,7 @@
             // 
             // textCon
             // 
-            textCon.Location = new Point(26, 170);
+            textCon.Location = new Point(26, 163);
             textCon.MaxLength = 12;
             textCon.Name = "textCon";
             textCon.Size = new Size(226, 27);
@@ -259,7 +264,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.White;
             label1.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(17, 12);
+            label1.Location = new Point(12, 12);
             label1.Name = "label1";
             label1.Size = new Size(541, 46);
             label1.TabIndex = 77;
@@ -267,6 +272,7 @@
             // 
             // panel6
             // 
+            panel6.AutoScroll = true;
             panel6.BackColor = Color.White;
             panel6.Controls.Add(btnEliminar);
             panel6.Controls.Add(btnSalir2);
@@ -343,7 +349,7 @@
             // 
             panel5.BackColor = Color.White;
             panel5.Controls.Add(label1);
-            panel5.Location = new Point(224, 12);
+            panel5.Location = new Point(383, 12);
             panel5.Name = "panel5";
             panel5.Size = new Size(566, 68);
             panel5.TabIndex = 78;
@@ -436,7 +442,7 @@
             // 
             // textCedu
             // 
-            textCedu.Location = new Point(544, 268);
+            textCedu.Location = new Point(421, 264);
             textCedu.Name = "textCedu";
             textCedu.Size = new Size(226, 27);
             textCedu.TabIndex = 1;
@@ -446,7 +452,7 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.White;
-            label3.Location = new Point(540, 238);
+            label3.Location = new Point(417, 234);
             label3.Name = "label3";
             label3.Size = new Size(64, 20);
             label3.TabIndex = 32;
@@ -483,9 +489,9 @@
             panel3.Controls.Add(textNombre);
             panel3.Controls.Add(combo1);
             panel3.Controls.Add(label5);
-            panel3.Location = new Point(155, 185);
+            panel3.Location = new Point(32, 220);
             panel3.Name = "panel3";
-            panel3.Size = new Size(696, 287);
+            panel3.Size = new Size(630, 287);
             panel3.TabIndex = 3;
             // 
             // button1
@@ -499,20 +505,49 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // panel7
+            // 
+            panel7.BackColor = Color.White;
+            panel7.Controls.Add(txtBuscar);
+            panel7.Controls.Add(btnBuscar);
+            panel7.Location = new Point(928, 96);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(366, 71);
+            panel7.TabIndex = 79;
+            // 
+            // txtBuscar
+            // 
+            txtBuscar.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtBuscar.Location = new Point(16, 17);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.Size = new Size(213, 38);
+            txtBuscar.TabIndex = 25;
+            // 
+            // btnBuscar
+            // 
+            btnBuscar.BackColor = Color.FromArgb(255, 255, 128);
+            btnBuscar.Location = new Point(235, 19);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(126, 36);
+            btnBuscar.TabIndex = 24;
+            btnBuscar.Text = "Buscar";
+            btnBuscar.UseVisualStyleBackColor = false;
+            btnBuscar.Click += btnBuscar_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.FromArgb(192, 192, 255);
-            ClientSize = new Size(1035, 550);
+            ClientSize = new Size(1351, 699);
+            Controls.Add(panel7);
             Controls.Add(button1);
             Controls.Add(panel6);
             Controls.Add(panel5);
             Controls.Add(textCedu);
             Controls.Add(label3);
             Controls.Add(panel3);
-            Controls.Add(listBox1);
             Controls.Add(panel1);
             Controls.Add(panel2);
             KeyPreview = true;
@@ -530,6 +565,8 @@
             panel5.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel7.ResumeLayout(false);
+            panel7.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -575,5 +612,8 @@
         private Button button1;
         private Button btnEditar;
         private Button btnEliminar;
+        private Panel panel7;
+        private TextBox txtBuscar;
+        private Button btnBuscar;
     }
 }

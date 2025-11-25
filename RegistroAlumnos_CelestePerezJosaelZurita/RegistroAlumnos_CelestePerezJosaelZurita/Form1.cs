@@ -38,13 +38,28 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
         private void btnGua1_Click(object sender, EventArgs e)
         {
             Validar v = new Validar();
-            if (v.ValidarCampos(textNombre, textCedu, textCon,
-                                textCon2, check1,
-                                combo1, combo2,
-                                rbtMat, rbtVis, check2))
+            if (!v.ValidarCampos(textNombre, textCedu, textCon,
+                                 textCon2, check1,
+                                 combo1, combo2,
+                                 rbtMat, rbtVis, check2))
             {
-                MessageBox.Show("Validación correcta ✔️", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return; // Si falla validación, no continuar
             }
+
+            // Validar que la cédula no esté duplicada en SQL
+            using (SqlConnection conn = new Conexion().Abrir())
+            {
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Alumnos WHERE Cedula=@Cedula", conn);
+                cmd.Parameters.AddWithValue("@Cedula", textCedu.Text.Trim());
+                int existe = Convert.ToInt32(cmd.ExecuteScalar());
+                if (existe > 0)
+                {
+                    MessageBox.Show("La cédula ya está registrada. No se puede duplicar.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            MessageBox.Show("Validación correcta ✔️", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //Salir del formulario
@@ -111,7 +126,7 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
 
         private void CargarListBox()
         {
-            estudiantesRegistrados.Clear(); 
+            estudiantesRegistrados.Clear();
 
             try
             {
@@ -287,7 +302,7 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
             string nombreEliminar = listBox1.SelectedItem.ToString();
             string cedulaEliminar = textCedu.Text.Trim();
 
-            if (crud.EliminarAlumnoPorCedula(cedulaEliminar)) 
+            if (crud.EliminarAlumnoPorCedula(cedulaEliminar))
             {
                 estudiantesRegistrados.Remove(nombreEliminar);
                 ActualizarListBox();
@@ -296,7 +311,7 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
 
         private void listBox1_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         //Logica para listBox al doble click se puede editar o eliminar 
@@ -330,6 +345,48 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
             }
         }
 
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string cedulaBuscada = txtBuscar.Text.Trim();
 
+            if (string.IsNullOrEmpty(cedulaBuscada))
+            {
+                MessageBox.Show("Ingresa una cédula para buscar.");
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection conn = new Conexion().Abrir())
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM Alumnos WHERE Cedula=@Cedula", conn);
+                    cmd.Parameters.AddWithValue("@Cedula", cedulaBuscada);
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.Read())
+                    {
+                        textNombre.Text = dr["Nombre"].ToString();
+                        textCedu.Text = dr["Cedula"].ToString();
+                        combo1.Text = dr["Carrera"].ToString();
+                        combo2.Text = dr["Semestre"].ToString();
+                        rbtMat.Checked = dr["Jornada"].ToString() == "Matutina";
+                        rbtVis.Checked = dr["Jornada"].ToString() == "Vespertina";
+                        check2.Checked = Convert.ToBoolean(dr["RecibirNotificaciones"]);
+                        textUser.Text = dr["Usuario"].ToString();
+                        textCon.Text = dr["Contrasena"].ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No existe un alumno con esa cédula.", "Buscar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    dr.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar alumno: " + ex.Message);
+            }
+        }
     }//fin
 }
