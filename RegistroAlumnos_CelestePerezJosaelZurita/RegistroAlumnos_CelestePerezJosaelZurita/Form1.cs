@@ -137,7 +137,7 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
         private void btnAyuda_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Aplicación: Registro de Alumnos\n" +
-                   "Versión: 1.0\n" +
+                   "Versión: 2.0\n" +
                    "Autor: Celeste Pérez y Josael Zurita \n",
                    "Ayuda",
                    MessageBoxButtons.OK,
@@ -156,6 +156,16 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
             if (e.KeyCode == Keys.Escape)
             {
                 btnNuevo2.PerformClick();
+            }
+
+            if (e.Control && e.KeyCode == Keys.D)
+            {
+                btnEliminar.PerformClick();
+            }
+
+            if (e.Control && e.KeyCode == Keys.E)
+            {
+                btnEditar.PerformClick();
             }
         }
 
@@ -202,6 +212,7 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
             }
         }
 
+        //botón para comprobar la conexion correcta o posibles errores en su trascurso 
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -251,6 +262,7 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
 
         }
 
+        //Botón para eliminar un estudiante
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex < 0)
@@ -262,7 +274,7 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
             string nombreEliminar = listBox1.SelectedItem.ToString();
             string cedulaEliminar = textCedu.Text.Trim();
 
-            if (crud.EliminarAlumnoPorCedula(cedulaEliminar)) // versión CRUD optimizada
+            if (crud.EliminarAlumnoPorCedula(cedulaEliminar)) 
             {
                 estudiantesRegistrados.Remove(nombreEliminar);
                 ActualizarListBox();
@@ -274,6 +286,7 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
            
         }
 
+        //Logica para listBox al doble click se puede editar o eliminar 
         private bool estaEditando = false;
         private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {

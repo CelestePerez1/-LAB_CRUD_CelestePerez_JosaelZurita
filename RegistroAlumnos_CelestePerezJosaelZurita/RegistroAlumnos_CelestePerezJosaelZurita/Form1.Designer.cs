@@ -473,7 +473,6 @@
             // panel3
             // 
             panel3.BackColor = Color.White;
-            panel3.Controls.Add(button1);
             panel3.Controls.Add(label13);
             panel3.Controls.Add(rbtVis);
             panel3.Controls.Add(combo2);
@@ -491,11 +490,11 @@
             // 
             // button1
             // 
-            button1.Location = new Point(573, 237);
+            button1.Location = new Point(2, 12);
             button1.Name = "button1";
             button1.Size = new Size(94, 29);
             button1.TabIndex = 2;
-            button1.Text = "button1";
+            button1.Text = "Conexion";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -506,6 +505,7 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(192, 192, 255);
             ClientSize = new Size(1035, 550);
+            Controls.Add(button1);
             Controls.Add(panel6);
             Controls.Add(panel5);
             Controls.Add(textCedu);
