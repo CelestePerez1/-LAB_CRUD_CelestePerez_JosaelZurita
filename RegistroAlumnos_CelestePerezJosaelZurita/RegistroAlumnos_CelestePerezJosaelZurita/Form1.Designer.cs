@@ -47,7 +47,9 @@
             textCon = new TextBox();
             label1 = new Label();
             panel6 = new Panel();
+            btnEliminar = new Button();
             btnSalir2 = new Button();
+            btnEditar = new Button();
             btnAyuda = new Button();
             btnNuevo2 = new Button();
             btnGua2 = new Button();
@@ -151,7 +153,9 @@
             listBox1.ScrollAlwaysVisible = true;
             listBox1.Size = new Size(521, 64);
             listBox1.TabIndex = 88;
+            listBox1.Click += listBox1_Click;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            listBox1.MouseDoubleClick += listBox1_MouseDoubleClick;
             // 
             // panel1
             // 
@@ -260,18 +264,30 @@
             // panel6
             // 
             panel6.BackColor = Color.White;
+            panel6.Controls.Add(btnEliminar);
             panel6.Controls.Add(btnSalir2);
+            panel6.Controls.Add(btnEditar);
             panel6.Controls.Add(btnAyuda);
             panel6.Controls.Add(btnNuevo2);
             panel6.Controls.Add(btnGua2);
             panel6.Location = new Point(96, 98);
             panel6.Name = "panel6";
-            panel6.Size = new Size(566, 68);
+            panel6.Size = new Size(826, 68);
             panel6.TabIndex = 43;
+            // 
+            // btnEliminar
+            // 
+            btnEliminar.Location = new Point(417, 17);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(126, 36);
+            btnEliminar.TabIndex = 4;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnSalir2
             // 
-            btnSalir2.Location = new Point(414, 17);
+            btnSalir2.Location = new Point(677, 17);
             btnSalir2.Name = "btnSalir2";
             btnSalir2.Size = new Size(126, 36);
             btnSalir2.TabIndex = 1;
@@ -279,9 +295,19 @@
             btnSalir2.UseVisualStyleBackColor = true;
             btnSalir2.Click += button3_Click;
             // 
+            // btnEditar
+            // 
+            btnEditar.Location = new Point(285, 17);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(126, 36);
+            btnEditar.TabIndex = 3;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
+            // 
             // btnAyuda
             // 
-            btnAyuda.Location = new Point(284, 17);
+            btnAyuda.Location = new Point(547, 17);
             btnAyuda.Name = "btnAyuda";
             btnAyuda.Size = new Size(126, 36);
             btnAyuda.TabIndex = 0;
@@ -313,7 +339,7 @@
             // 
             panel5.BackColor = Color.White;
             panel5.Controls.Add(label1);
-            panel5.Location = new Point(96, 6);
+            panel5.Location = new Point(256, 12);
             panel5.Name = "panel5";
             panel5.Size = new Size(566, 68);
             panel5.TabIndex = 78;
@@ -467,7 +493,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.FromArgb(192, 192, 255);
-            ClientSize = new Size(750, 550);
+            ClientSize = new Size(1035, 550);
             Controls.Add(panel6);
             Controls.Add(panel5);
             Controls.Add(rbtVis);
@@ -546,5 +572,7 @@
         private TextBox txtContAlumno;
         private CheckBox check2;
         private Button button1;
+        private Button btnEditar;
+        private Button btnEliminar;
     }
 }

@@ -9,13 +9,14 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
     {
         // Lista para almacenar los estudiantes registrados
         private List<string> estudiantesRegistrados = new List<string>();
-
+        private CRUD crud = new CRUD();
         public Form1()
         {
             InitializeComponent();
             //centrar la ventana
             this.StartPosition = FormStartPosition.CenterScreen;
             ActualizarContador();
+            CargarListBox();
         }
 
         private void btnNuevo2_Click(object sender, EventArgs e)
@@ -36,28 +37,13 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
 
         private void btnGua1_Click(object sender, EventArgs e)
         {
-            //valida datos y despues debe mostrar esos datos en el listBox
             Validar v = new Validar();
             if (v.ValidarCampos(textNombre, textCedu, textCon,
                                 textCon2, check1,
                                 combo1, combo2,
                                 rbtMat, rbtVis, check2))
             {
-                // Agregar el nombre del estudiante a la lista
-                string nombreEstudiante = textNombre.Text.Trim();
-                estudiantesRegistrados.Add(nombreEstudiante);
-
-                // Actualizar el ListBox con la lista completa
-                listBox1.DataSource = null;
-                listBox1.DataSource = estudiantesRegistrados;
-
-                // Actualizar el contador
-                ActualizarContador();
-
-                MessageBox.Show("Estudiante registrado exitosamente.",
-                               "Éxito",
-                               MessageBoxButtons.OK,
-                               MessageBoxIcon.Information);
+                MessageBox.Show("Validación correcta ✔️", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -69,35 +55,77 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
             this.Close();
         }
 
+        private void ActualizarListBox()
+        {
+            listBox1.DataSource = null;
+            listBox1.DataSource = estudiantesRegistrados;
+            txtContAlumno.Text = estudiantesRegistrados.Count.ToString();
+        }
+
+
         //configuracion del botón 2 de guardar, guarda los datos como tal!!!
         private void btnGua2_Click(object sender, EventArgs e)
         {
             Validar v = new Validar();
-            if (v.ValidarCampos(textNombre, textCedu, textCon,
-                                textCon2, check1,
-                                combo1, combo2,
-                                rbtMat, rbtVis, check2))
+            if (!v.ValidarCampos(textNombre, textCedu, textCon,
+                                 textCon2, check1,
+                                 combo1, combo2,
+                                 rbtMat, rbtVis, check2))
             {
-                // Agregar el nombre del estudiante a la lista
-                string nombreEstudiante = textNombre.Text.Trim();
-                estudiantesRegistrados.Add(nombreEstudiante);
+                return; // Si falla validación, no insertar
+            }
 
-                // Actualizar el ListBox con la lista completa
+            // Guardar en SQL
+            crud.InsertarAlumno(textNombre, textCedu, textCon, textCon2,
+                                combo1, combo2, rbtMat, rbtVis, check2, textUser);
+
+            // Solo actualizar lista de nombres (ListBox), sin tocar campos
+            CargarListBox();
+
+            // Limpiar los campos solo si quieres preparar para un nuevo registro
+            btnNuevo2.PerformClick();
+        }
+
+
+        private void CargarListBox()
+        {
+            estudiantesRegistrados.Clear(); // limpiar lista local
+
+            try
+            {
+                using (SqlConnection conn = new Conexion().Abrir())
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT Nombre FROM Alumnos ORDER BY Nombre", conn);
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        estudiantesRegistrados.Add(dr["Nombre"].ToString());
+                    }
+
+                    dr.Close();
+                }
+
+                // Actualizar ListBox
                 listBox1.DataSource = null;
                 listBox1.DataSource = estudiantesRegistrados;
-
-                // Actualizar el contador
-                ActualizarContador();
-
-                MessageBox.Show("Estudiante registrado exitosamente.",
-                               "Éxito",
-                               MessageBoxButtons.OK,
-                               MessageBoxIcon.Information);
-
-                // Limpiar los campos después de guardar
-                btnNuevo2.PerformClick();
+                txtContAlumno.Text = estudiantesRegistrados.Count.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error cargando la lista: " + ex.Message);
             }
         }
+
+
+
+
+
+
+
+
+
+
 
         // Método para actualizar el contador de estudiantes
         private void ActualizarContador()
@@ -137,6 +165,8 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -179,15 +209,101 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
                 Conexion cn = new Conexion();
                 cn.Abrir();
 
-                MessageBox.Show("Conexión exitosa ✔️", "SQL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Conexión exitosa", "SQL", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 cn.Cerrar();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error de conexión ❌\n" + ex.Message, "SQL",
+                MessageBox.Show("Error de conexión\n" + ex.Message, "SQL",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }     
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            if (!estaEditando)
+            {
+                MessageBox.Show("Haz doble click sobre un alumno para editar.", "Aviso");
+                return;
+            }
+
+            Validar v = new Validar();
+            if (!v.ValidarCampos(textNombre, textCedu, textCon, textCon2,
+                                 check1, combo1, combo2, rbtMat, rbtVis, check2))
+            {
+                return;
+            }
+
+            if (MessageBox.Show("¿Deseas actualizar este alumno?", "Editar",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                crud.ActualizarAlumno(textNombre, textCedu, textCon, textCon2,
+                                      combo1, combo2, rbtMat, rbtVis, check2, textUser);
+
+                // Recargar lista desde SQL
+                CargarListBox();
+
+                // Limpiar campos y desactivar edición
+                btnNuevo2.PerformClick();
+                estaEditando = false;
+            }
+
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona un estudiante para eliminar.");
+                return;
+            }
+
+            string nombreEliminar = listBox1.SelectedItem.ToString();
+            string cedulaEliminar = textCedu.Text.Trim();
+
+            if (crud.EliminarAlumnoPorCedula(cedulaEliminar)) // versión CRUD optimizada
+            {
+                estudiantesRegistrados.Remove(nombreEliminar);
+                ActualizarListBox();
+            }
+        }
+
+        private void listBox1_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private bool estaEditando = false;
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                string nombreSeleccionado = listBox1.SelectedItem.ToString();
+                SqlConnection conn = new Conexion().Abrir();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Alumnos WHERE Nombre=@Nombre", conn);
+                cmd.Parameters.AddWithValue("@Nombre", nombreSeleccionado);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    estaEditando = true;
+                    textNombre.Text = dr["Nombre"].ToString();
+                    textCedu.Text = dr["Cedula"].ToString();
+                    combo1.Text = dr["Carrera"].ToString();
+                    combo2.Text = dr["Semestre"].ToString();
+                    rbtMat.Checked = dr["Jornada"].ToString() == "Matutina";
+                    rbtVis.Checked = dr["Jornada"].ToString() == "Vespertina";
+                    check2.Checked = Convert.ToBoolean(dr["RecibirNotificaciones"]);
+                    textUser.Text = dr["Usuario"].ToString();
+                    textCon.Text = dr["Contrasena"].ToString();
+                }
+
+                dr.Close();
+                new Conexion().Cerrar();
+            }
+        }
+
+
     }//fin
 }
