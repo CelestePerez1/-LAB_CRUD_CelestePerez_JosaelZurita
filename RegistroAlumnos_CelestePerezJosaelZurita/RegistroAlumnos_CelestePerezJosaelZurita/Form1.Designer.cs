@@ -65,6 +65,7 @@
             textNombre = new TextBox();
             label2 = new Label();
             panel3 = new Panel();
+            button1 = new Button();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
@@ -87,7 +88,7 @@
             textCon2.MaxLength = 12;
             textCon2.Name = "textCon2";
             textCon2.Size = new Size(226, 27);
-            textCon2.TabIndex = 16;
+            textCon2.TabIndex = 1;
             // 
             // label8
             // 
@@ -116,7 +117,7 @@
             check1.Location = new Point(136, 711);
             check1.Name = "check1";
             check1.Size = new Size(337, 24);
-            check1.TabIndex = 20;
+            check1.TabIndex = 7;
             check1.Text = "Acepto los términos y condiciones del sistema";
             check1.UseVisualStyleBackColor = false;
             // 
@@ -126,7 +127,7 @@
             btnGua1.Location = new Point(403, 264);
             btnGua1.Name = "btnGua1";
             btnGua1.Size = new Size(142, 36);
-            btnGua1.TabIndex = 21;
+            btnGua1.TabIndex = 4;
             btnGua1.Text = "Guardar";
             btnGua1.UseVisualStyleBackColor = false;
             btnGua1.Click += btnGua1_Click;
@@ -149,7 +150,7 @@
             listBox1.Name = "listBox1";
             listBox1.ScrollAlwaysVisible = true;
             listBox1.Size = new Size(521, 64);
-            listBox1.TabIndex = 25;
+            listBox1.TabIndex = 88;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // panel1
@@ -203,7 +204,7 @@
             panel2.Location = new Point(96, 496);
             panel2.Name = "panel2";
             panel2.Size = new Size(566, 321);
-            panel2.TabIndex = 27;
+            panel2.TabIndex = 6;
             // 
             // check2
             // 
@@ -212,7 +213,7 @@
             check2.Location = new Point(40, 245);
             check2.Name = "check2";
             check2.Size = new Size(180, 24);
-            check2.TabIndex = 44;
+            check2.TabIndex = 3;
             check2.Text = "Recibir Notificaciones ";
             check2.UseVisualStyleBackColor = false;
             // 
@@ -223,7 +224,7 @@
             label7.Location = new Point(40, 56);
             label7.Name = "label7";
             label7.Size = new Size(262, 20);
-            label7.TabIndex = 44;
+            label7.TabIndex = 66;
             label7.Text = "Usuario (Generado automáticamente):";
             // 
             // label12
@@ -243,7 +244,7 @@
             textCon.MaxLength = 12;
             textCon.Name = "textCon";
             textCon.Size = new Size(226, 27);
-            textCon.TabIndex = 28;
+            textCon.TabIndex = 0;
             // 
             // label1
             // 
@@ -253,7 +254,7 @@
             label1.Location = new Point(17, 12);
             label1.Name = "label1";
             label1.Size = new Size(541, 46);
-            label1.TabIndex = 0;
+            label1.TabIndex = 77;
             label1.Text = "Sistema de Registro de Estudiantes";
             // 
             // panel6
@@ -273,7 +274,7 @@
             btnSalir2.Location = new Point(414, 17);
             btnSalir2.Name = "btnSalir2";
             btnSalir2.Size = new Size(126, 36);
-            btnSalir2.TabIndex = 26;
+            btnSalir2.TabIndex = 1;
             btnSalir2.Text = "Salir";
             btnSalir2.UseVisualStyleBackColor = true;
             btnSalir2.Click += button3_Click;
@@ -283,7 +284,7 @@
             btnAyuda.Location = new Point(284, 17);
             btnAyuda.Name = "btnAyuda";
             btnAyuda.Size = new Size(126, 36);
-            btnAyuda.TabIndex = 25;
+            btnAyuda.TabIndex = 0;
             btnAyuda.Text = "Ayuda";
             btnAyuda.UseVisualStyleBackColor = true;
             btnAyuda.Click += btnAyuda_Click;
@@ -293,7 +294,7 @@
             btnNuevo2.Location = new Point(153, 17);
             btnNuevo2.Name = "btnNuevo2";
             btnNuevo2.Size = new Size(126, 36);
-            btnNuevo2.TabIndex = 24;
+            btnNuevo2.TabIndex = 2;
             btnNuevo2.Text = "Nuevo";
             btnNuevo2.UseVisualStyleBackColor = true;
             btnNuevo2.Click += btnNuevo2_Click;
@@ -315,7 +316,7 @@
             panel5.Location = new Point(96, 6);
             panel5.Name = "panel5";
             panel5.Size = new Size(566, 68);
-            panel5.TabIndex = 42;
+            panel5.TabIndex = 78;
             // 
             // label13
             // 
@@ -325,7 +326,7 @@
             label13.Location = new Point(25, 6);
             label13.Name = "label13";
             label13.Size = new Size(162, 25);
-            label13.TabIndex = 30;
+            label13.TabIndex = 0;
             label13.Text = "Datos del Alumno";
             // 
             // rbtVis
@@ -335,7 +336,7 @@
             rbtVis.Location = new Point(292, 418);
             rbtVis.Name = "rbtVis";
             rbtVis.Size = new Size(99, 24);
-            rbtVis.TabIndex = 40;
+            rbtVis.TabIndex = 5;
             rbtVis.TabStop = true;
             rbtVis.Text = "Vespertina";
             rbtVis.UseVisualStyleBackColor = false;
@@ -347,7 +348,7 @@
             rbtMat.Location = new Point(132, 418);
             rbtMat.Name = "rbtMat";
             rbtMat.Size = new Size(89, 24);
-            rbtMat.TabIndex = 39;
+            rbtMat.TabIndex = 4;
             rbtMat.TabStop = true;
             rbtMat.Text = "Matutina";
             rbtMat.UseVisualStyleBackColor = false;
@@ -360,7 +361,7 @@
             combo2.Location = new Point(318, 147);
             combo2.Name = "combo2";
             combo2.Size = new Size(185, 28);
-            combo2.TabIndex = 38;
+            combo2.TabIndex = 1;
             // 
             // label6
             // 
@@ -381,7 +382,7 @@
             combo1.Location = new Point(138, 340);
             combo1.Name = "combo1";
             combo1.Size = new Size(185, 28);
-            combo1.TabIndex = 36;
+            combo1.TabIndex = 2;
             // 
             // label4
             // 
@@ -408,7 +409,7 @@
             textCedu.Location = new Point(414, 275);
             textCedu.Name = "textCedu";
             textCedu.Size = new Size(226, 27);
-            textCedu.TabIndex = 33;
+            textCedu.TabIndex = 1;
             textCedu.TextChanged += textCedu_TextChanged;
             // 
             // label3
@@ -426,7 +427,7 @@
             textNombre.Location = new Point(136, 275);
             textNombre.Name = "textNombre";
             textNombre.Size = new Size(248, 27);
-            textNombre.TabIndex = 31;
+            textNombre.TabIndex = 0;
             textNombre.TextChanged += textNombre_TextChanged_1;
             // 
             // label2
@@ -442,12 +443,23 @@
             // panel3
             // 
             panel3.BackColor = Color.White;
+            panel3.Controls.Add(button1);
             panel3.Controls.Add(label13);
             panel3.Controls.Add(combo2);
             panel3.Location = new Point(96, 193);
             panel3.Name = "panel3";
             panel3.Size = new Size(566, 287);
-            panel3.TabIndex = 41;
+            panel3.TabIndex = 3;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(423, 225);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 2;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // Form1
             // 
@@ -478,7 +490,6 @@
             Controls.Add(panel2);
             KeyPreview = true;
             Name = "Form1";
-            Text = "Form1";
             FormClosing += Form1_FormClosing;
             KeyDown += Form1_KeyDown;
             panel1.ResumeLayout(false);
@@ -534,5 +545,6 @@
         private Button btnNuevo2;
         private TextBox txtContAlumno;
         private CheckBox check2;
+        private Button button1;
     }
 }

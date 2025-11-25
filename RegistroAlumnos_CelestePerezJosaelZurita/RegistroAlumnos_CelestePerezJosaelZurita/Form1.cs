@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Microsoft.Data.SqlClient;
 
 namespace RegistroAlumnos_CelestePerezJosaelZurita
 {
@@ -149,7 +150,7 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
             GenerarUsuario();
         }
 
-         private void textCedu_TextChanged(object sender, EventArgs e)
+        private void textCedu_TextChanged(object sender, EventArgs e)
         {
             GenerarUsuario();
         }
@@ -171,6 +172,22 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
             }
         }
 
-       
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Conexion cn = new Conexion();
+                cn.Abrir();
+
+                MessageBox.Show("Conexión exitosa ✔️", "SQL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                cn.Cerrar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error de conexión ❌\n" + ex.Message, "SQL",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }     
     }//fin
 }
