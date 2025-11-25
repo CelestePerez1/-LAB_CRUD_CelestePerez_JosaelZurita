@@ -490,12 +490,13 @@
             // 
             // button1
             // 
+            button1.BackColor = Color.FromArgb(192, 192, 255);
             button1.Location = new Point(2, 12);
             button1.Name = "button1";
             button1.Size = new Size(94, 29);
             button1.TabIndex = 2;
             button1.Text = "Conexion";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // Form1

@@ -67,29 +67,51 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
         private void btnGua2_Click(object sender, EventArgs e)
         {
             Validar v = new Validar();
-            if (!v.ValidarCampos(textNombre, textCedu, textCon,
-                                 textCon2, check1,
-                                 combo1, combo2,
-                                 rbtMat, rbtVis, check2))
+            if (!v.ValidarCampos(textNombre, textCedu, textCon, textCon2,
+                                 check1, combo1, combo2, rbtMat, rbtVis, check2))
             {
                 return; // Si falla validación, no insertar
+            }
+
+            if (CedulaExiste(textCedu.Text.Trim()))
+            {
+                MessageBox.Show("La cédula ya está registrada. Usa otra.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             // Guardar en SQL
             crud.InsertarAlumno(textNombre, textCedu, textCon, textCon2,
                                 combo1, combo2, rbtMat, rbtVis, check2, textUser);
 
-            // Solo actualizar lista de nombres (ListBox), sin tocar campos
+            // Recargar lista desde SQL
             CargarListBox();
 
-            // Limpiar los campos solo si quieres preparar para un nuevo registro
+            // Limpiar campos
             btnNuevo2.PerformClick();
         }
 
 
+        private bool CedulaExiste(string cedula)
+        {
+            try
+            {
+                using (SqlConnection conn = new Conexion().Abrir())
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Alumnos WHERE Cedula=@Cedula", conn);
+                    cmd.Parameters.AddWithValue("@Cedula", cedula);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    return count > 0;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private void CargarListBox()
         {
-            estudiantesRegistrados.Clear(); // limpiar lista local
+            estudiantesRegistrados.Clear(); 
 
             try
             {
@@ -116,15 +138,6 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
                 MessageBox.Show("Error cargando la lista: " + ex.Message);
             }
         }
-
-
-
-
-
-
-
-
-
 
 
         // Método para actualizar el contador de estudiantes
