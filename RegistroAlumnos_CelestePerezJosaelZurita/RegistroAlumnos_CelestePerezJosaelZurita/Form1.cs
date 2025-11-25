@@ -9,6 +9,8 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
     {
         // Lista para almacenar los estudiantes registrados
         private List<string> estudiantesRegistrados = new List<string>();
+        private List<int> idsRegistrados = new List<int>(); // Guardamos IDs para referencia
+        private int idActual = -1;
         private CRUD crud = new CRUD();
         public Form1()
         {
@@ -29,6 +31,7 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
             textUser.Clear();
             textCon.Clear();
             textCon2.Clear();
+            txtBuscar.Clear();
             rbtMat.Checked = false;
             rbtVis.Checked = false;
             check1.Checked = false;
@@ -127,23 +130,26 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
         private void CargarListBox()
         {
             estudiantesRegistrados.Clear();
+            idsRegistrados.Clear();
 
             try
             {
                 using (SqlConnection conn = new Conexion().Abrir())
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT Nombre FROM Alumnos ORDER BY Nombre", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT ID, Nombre, Carrera, Jornada FROM Alumnos ORDER BY Nombre", conn);
                     SqlDataReader dr = cmd.ExecuteReader();
 
                     while (dr.Read())
                     {
-                        estudiantesRegistrados.Add(dr["Nombre"].ToString());
+                        int id = Convert.ToInt32(dr["ID"]);
+                        string item = $"{id} — {dr["Nombre"]} — {dr["Carrera"]} — {dr["Jornada"]}";
+                        estudiantesRegistrados.Add(item);
+                        idsRegistrados.Add(id);
                     }
 
                     dr.Close();
                 }
 
-                // Actualizar ListBox
                 listBox1.DataSource = null;
                 listBox1.DataSource = estudiantesRegistrados;
                 txtContAlumno.Text = estudiantesRegistrados.Count.ToString();
@@ -261,7 +267,7 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (!estaEditando)
+            if (!estaEditando || idActual == -1)
             {
                 MessageBox.Show("Haz doble click sobre un alumno para editar.", "Aviso");
                 return;
@@ -274,18 +280,23 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
                 return;
             }
 
+            // Validar cédula duplicada (excepto este mismo alumno)
+            if (CedulaExiste(textCedu.Text.Trim(), idActual))
+            {
+                MessageBox.Show("La cédula ya está registrada en otro alumno.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (MessageBox.Show("¿Deseas actualizar este alumno?", "Editar",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                crud.ActualizarAlumno(textNombre, textCedu, textCon, textCon2,
-                                      combo1, combo2, rbtMat, rbtVis, check2, textUser);
+                crud.ActualizarAlumnoPorID(idActual, textNombre, textCedu, textCon, textCon2,
+                                           combo1, combo2, rbtMat, rbtVis, check2, textUser);
 
-                // Recargar lista desde SQL
                 CargarListBox();
-
-                // Limpiar campos y desactivar edición
                 btnNuevo2.PerformClick();
                 estaEditando = false;
+                idActual = -1;
             }
 
         }
@@ -299,13 +310,12 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
                 return;
             }
 
-            string nombreEliminar = listBox1.SelectedItem.ToString();
-            string cedulaEliminar = textCedu.Text.Trim();
+            int idAEliminar = idsRegistrados[listBox1.SelectedIndex];
 
-            if (crud.EliminarAlumnoPorCedula(cedulaEliminar))
+            if (crud.EliminarAlumnoPorID(idAEliminar))
             {
-                estudiantesRegistrados.Remove(nombreEliminar);
-                ActualizarListBox();
+                CargarListBox();
+                btnNuevo2.PerformClick();
             }
         }
 
@@ -320,35 +330,43 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
         {
             if (listBox1.SelectedIndex != -1)
             {
-                string nombreSeleccionado = listBox1.SelectedItem.ToString();
-                SqlConnection conn = new Conexion().Abrir();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM Alumnos WHERE Nombre=@Nombre", conn);
-                cmd.Parameters.AddWithValue("@Nombre", nombreSeleccionado);
-                SqlDataReader dr = cmd.ExecuteReader();
+                idActual = idsRegistrados[listBox1.SelectedIndex]; // tomamos el ID
 
-                if (dr.Read())
+                try
                 {
-                    estaEditando = true;
-                    textNombre.Text = dr["Nombre"].ToString();
-                    textCedu.Text = dr["Cedula"].ToString();
-                    combo1.Text = dr["Carrera"].ToString();
-                    combo2.Text = dr["Semestre"].ToString();
-                    rbtMat.Checked = dr["Jornada"].ToString() == "Matutina";
-                    rbtVis.Checked = dr["Jornada"].ToString() == "Vespertina";
-                    check2.Checked = Convert.ToBoolean(dr["RecibirNotificaciones"]);
-                    textUser.Text = dr["Usuario"].ToString();
-                    textCon.Text = dr["Contrasena"].ToString();
-                }
+                    using (SqlConnection conn = new Conexion().Abrir())
+                    {
+                        SqlCommand cmd = new SqlCommand("SELECT * FROM Alumnos WHERE ID=@ID", conn);
+                        cmd.Parameters.AddWithValue("@ID", idActual);
+                        SqlDataReader dr = cmd.ExecuteReader();
 
-                dr.Close();
-                new Conexion().Cerrar();
+                        if (dr.Read())
+                        {
+                            estaEditando = true;
+                            textNombre.Text = dr["Nombre"].ToString();
+                            textCedu.Text = dr["Cedula"].ToString();
+                            combo1.Text = dr["Carrera"].ToString();
+                            combo2.Text = dr["Semestre"].ToString();
+                            rbtMat.Checked = dr["Jornada"].ToString() == "Matutina";
+                            rbtVis.Checked = dr["Jornada"].ToString() == "Vespertina";
+                            check2.Checked = Convert.ToBoolean(dr["RecibirNotificaciones"]);
+                            textUser.Text = dr["Usuario"].ToString();
+                            textCon.Text = dr["Contrasena"].ToString();
+                        }
+
+                        dr.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error cargando alumno: " + ex.Message);
+                }
             }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             string cedulaBuscada = txtBuscar.Text.Trim();
-
             if (string.IsNullOrEmpty(cedulaBuscada))
             {
                 MessageBox.Show("Ingresa una cédula para buscar.");
@@ -365,6 +383,9 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
 
                     if (dr.Read())
                     {
+                        idActual = Convert.ToInt32(dr["ID"]);
+                        estaEditando = true;
+
                         textNombre.Text = dr["Nombre"].ToString();
                         textCedu.Text = dr["Cedula"].ToString();
                         combo1.Text = dr["Carrera"].ToString();
@@ -388,5 +409,26 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
                 MessageBox.Show("Error al buscar alumno: " + ex.Message);
             }
         }
+
+
+        private bool CedulaExiste(string cedula, int idExcluir)
+        {
+            try
+            {
+                using (SqlConnection conn = new Conexion().Abrir())
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Alumnos WHERE Cedula=@Cedula AND ID<>@ID", conn);
+                    cmd.Parameters.AddWithValue("@Cedula", cedula);
+                    cmd.Parameters.AddWithValue("@ID", idExcluir);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    return count > 0;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }//fin
 }

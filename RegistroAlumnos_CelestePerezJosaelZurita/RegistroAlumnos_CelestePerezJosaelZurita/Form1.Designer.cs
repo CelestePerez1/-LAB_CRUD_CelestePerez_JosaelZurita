@@ -372,7 +372,7 @@
             rbtVis.Location = new Point(174, 242);
             rbtVis.Name = "rbtVis";
             rbtVis.Size = new Size(99, 24);
-            rbtVis.TabIndex = 5;
+            rbtVis.TabIndex = 6;
             rbtVis.TabStop = true;
             rbtVis.Text = "Vespertina";
             rbtVis.UseVisualStyleBackColor = false;
@@ -427,7 +427,7 @@
             label4.Location = new Point(25, 209);
             label4.Name = "label4";
             label4.Size = new Size(70, 20);
-            label4.TabIndex = 6;
+            label4.TabIndex = 8;
             label4.Text = "Jornada:*";
             // 
             // label5

@@ -56,10 +56,9 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
 
 
         // UPDATE
-        public void ActualizarAlumno(TextBox textNombre, TextBox textCedu, TextBox textCon, TextBox textCon2,
-                                     ComboBox combo1, ComboBox combo2,
-                                     RadioButton rbtMat, RadioButton rbtVis,
-                                     CheckBox check2, TextBox textUser)
+        public void ActualizarAlumnoPorID(int id, TextBox textNombre, TextBox textCedu, TextBox textCon, TextBox textCon2,
+                                          ComboBox combo1, ComboBox combo2, RadioButton rbtMat, RadioButton rbtVis,
+                                          CheckBox check2, TextBox textUser)
         {
             try
             {
@@ -67,13 +66,14 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
 
                 string sql = @"UPDATE Alumnos SET
                         Nombre=@Nombre,
+                        Cedula=@Cedula,
                         Carrera=@Carrera,
                         Semestre=@Semestre,
                         Jornada=@Jornada,
                         Usuario=@Usuario,
                         Contrasena=@Contrasena,
                         RecibirNotificaciones=@Noti
-                        WHERE Cedula=@Cedula";
+                        WHERE ID=@ID";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
@@ -88,6 +88,7 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
                 cmd.Parameters.AddWithValue("@Usuario", textUser.Text.Trim());
                 cmd.Parameters.AddWithValue("@Contrasena", textCon.Text.Trim());
                 cmd.Parameters.AddWithValue("@Noti", check2.Checked);
+                cmd.Parameters.AddWithValue("@ID", id);
 
                 cmd.ExecuteNonQuery();
 
@@ -102,14 +103,15 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
         }
 
         // DELETE
-        public bool EliminarAlumnoPorCedula(string cedula)
+        public bool EliminarAlumnoPorID(int id)
         {
+            
             try
             {
                 SqlConnection conn = cn.Abrir();
-                string sql = "DELETE FROM Alumnos WHERE Cedula=@Cedula";
+                string sql = "DELETE FROM Alumnos WHERE ID=@ID";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Cedula", cedula);
+                cmd.Parameters.AddWithValue("@ID", id);
 
                 int filas = cmd.ExecuteNonQuery();
                 cn.Cerrar();
