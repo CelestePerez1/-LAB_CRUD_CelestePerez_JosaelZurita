@@ -86,7 +86,7 @@
             textUser.Name = "textUser";
             textUser.ReadOnly = true;
             textUser.Size = new Size(248, 27);
-            textUser.TabIndex = 12;
+            textUser.TabIndex = 0;
             // 
             // textCon2
             // 
@@ -94,7 +94,7 @@
             textCon2.MaxLength = 12;
             textCon2.Name = "textCon2";
             textCon2.Size = new Size(226, 27);
-            textCon2.TabIndex = 1;
+            textCon2.TabIndex = 2;
             // 
             // label8
             // 
@@ -123,7 +123,7 @@
             check1.Location = new Point(26, 219);
             check1.Name = "check1";
             check1.Size = new Size(337, 24);
-            check1.TabIndex = 7;
+            check1.TabIndex = 3;
             check1.Text = "Acepto los términos y condiciones del sistema";
             check1.UseVisualStyleBackColor = false;
             // 
@@ -133,7 +133,7 @@
             btnGua1.Location = new Point(479, 244);
             btnGua1.Name = "btnGua1";
             btnGua1.Size = new Size(142, 36);
-            btnGua1.TabIndex = 4;
+            btnGua1.TabIndex = 5;
             btnGua1.Text = "Guardar";
             btnGua1.UseVisualStyleBackColor = false;
             btnGua1.Click += btnGua1_Click;
@@ -217,7 +217,7 @@
             panel2.Location = new Point(668, 220);
             panel2.Name = "panel2";
             panel2.Size = new Size(630, 287);
-            panel2.TabIndex = 6;
+            panel2.TabIndex = 1;
             // 
             // check2
             // 
@@ -226,7 +226,7 @@
             check2.Location = new Point(26, 249);
             check2.Name = "check2";
             check2.Size = new Size(180, 24);
-            check2.TabIndex = 3;
+            check2.TabIndex = 4;
             check2.Text = "Recibir Notificaciones ";
             check2.UseVisualStyleBackColor = false;
             // 
@@ -257,7 +257,7 @@
             textCon.MaxLength = 12;
             textCon.Name = "textCon";
             textCon.Size = new Size(226, 27);
-            textCon.TabIndex = 0;
+            textCon.TabIndex = 1;
             // 
             // label1
             // 
@@ -283,7 +283,7 @@
             panel6.Location = new Point(96, 98);
             panel6.Name = "panel6";
             panel6.Size = new Size(826, 68);
-            panel6.TabIndex = 43;
+            panel6.TabIndex = 5;
             // 
             // btnEliminar
             // 
@@ -397,7 +397,7 @@
             combo2.Location = new Point(385, 162);
             combo2.Name = "combo2";
             combo2.Size = new Size(185, 28);
-            combo2.TabIndex = 1;
+            combo2.TabIndex = 3;
             // 
             // label6
             // 
@@ -406,7 +406,7 @@
             label6.Location = new Point(385, 139);
             label6.Name = "label6";
             label6.Size = new Size(79, 20);
-            label6.TabIndex = 37;
+            label6.TabIndex = 7;
             label6.Text = "Semestre:*";
             // 
             // combo1
@@ -427,7 +427,7 @@
             label4.Location = new Point(25, 209);
             label4.Name = "label4";
             label4.Size = new Size(70, 20);
-            label4.TabIndex = 35;
+            label4.TabIndex = 6;
             label4.Text = "Jornada:*";
             // 
             // label5
@@ -442,7 +442,7 @@
             // 
             // textCedu
             // 
-            textCedu.Location = new Point(421, 264);
+            textCedu.Location = new Point(385, 83);
             textCedu.Name = "textCedu";
             textCedu.Size = new Size(226, 27);
             textCedu.TabIndex = 1;
@@ -452,7 +452,7 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.White;
-            label3.Location = new Point(417, 234);
+            label3.Location = new Point(381, 53);
             label3.Name = "label3";
             label3.Size = new Size(64, 20);
             label3.TabIndex = 32;
@@ -483,6 +483,8 @@
             panel3.Controls.Add(rbtVis);
             panel3.Controls.Add(combo2);
             panel3.Controls.Add(rbtMat);
+            panel3.Controls.Add(textCedu);
+            panel3.Controls.Add(label3);
             panel3.Controls.Add(label2);
             panel3.Controls.Add(label4);
             panel3.Controls.Add(label6);
@@ -492,7 +494,7 @@
             panel3.Location = new Point(32, 220);
             panel3.Name = "panel3";
             panel3.Size = new Size(630, 287);
-            panel3.TabIndex = 3;
+            panel3.TabIndex = 0;
             // 
             // button1
             // 
@@ -545,8 +547,6 @@
             Controls.Add(button1);
             Controls.Add(panel6);
             Controls.Add(panel5);
-            Controls.Add(textCedu);
-            Controls.Add(label3);
             Controls.Add(panel3);
             Controls.Add(panel1);
             Controls.Add(panel2);
@@ -568,7 +568,6 @@
             panel7.ResumeLayout(false);
             panel7.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
