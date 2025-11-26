@@ -37,6 +37,7 @@
             label10 = new Label();
             listBox1 = new ListBox();
             panel1 = new Panel();
+            RepGeneral = new Button();
             panel4 = new Panel();
             txtContAlumno = new TextBox();
             lblEST = new Label();
@@ -71,6 +72,7 @@
             panel7 = new Panel();
             txtBuscar = new TextBox();
             btnBuscar = new Button();
+            RepCarrera = new Button();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
@@ -164,13 +166,25 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(RepCarrera);
+            panel1.Controls.Add(RepGeneral);
             panel1.Controls.Add(panel4);
             panel1.Controls.Add(label10);
             panel1.Controls.Add(listBox1);
-            panel1.Location = new Point(32, 533);
+            panel1.Location = new Point(32, 535);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1266, 198);
+            panel1.Size = new Size(1266, 231);
             panel1.TabIndex = 26;
+            // 
+            // RepGeneral
+            // 
+            RepGeneral.Location = new Point(62, 187);
+            RepGeneral.Name = "RepGeneral";
+            RepGeneral.Size = new Size(158, 29);
+            RepGeneral.TabIndex = 89;
+            RepGeneral.Text = "Reporte General";
+            RepGeneral.UseVisualStyleBackColor = true;
+            RepGeneral.Click += RepGeneral_Click;
             // 
             // panel4
             // 
@@ -536,13 +550,23 @@
             btnBuscar.UseVisualStyleBackColor = false;
             btnBuscar.Click += btnBuscar_Click;
             // 
+            // RepCarrera
+            // 
+            RepCarrera.Location = new Point(237, 187);
+            RepCarrera.Name = "RepCarrera";
+            RepCarrera.Size = new Size(173, 29);
+            RepCarrera.TabIndex = 90;
+            RepCarrera.Text = "Reporte por Carrera";
+            RepCarrera.UseVisualStyleBackColor = true;
+            RepCarrera.Click += RepCarrera_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.FromArgb(192, 192, 255);
-            ClientSize = new Size(1351, 699);
+            ClientSize = new Size(1351, 763);
             Controls.Add(panel7);
             Controls.Add(button1);
             Controls.Add(panel6);
@@ -614,5 +638,7 @@
         private Panel panel7;
         private TextBox txtBuscar;
         private Button btnBuscar;
+        private Button RepGeneral;
+        private Button RepCarrera;
     }
 }

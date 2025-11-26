@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Reporting.NETCore;
+using System.Data.SqlClient;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
 
 namespace RegistroAlumnos_CelestePerezJosaelZurita
 {
@@ -430,5 +431,174 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
             }
         }
 
-    }//fin
+        private void RepGeneral_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Crear instancias del DataSet y TableAdapter
+                DBAlumnosDataSet ds = new DBAlumnosDataSet();
+                DBAlumnosDataSetTableAdapters.AlumnosTableAdapter adapter =
+                    new DBAlumnosDataSetTableAdapters.AlumnosTableAdapter();
+
+                // Llenar la tabla Alumnos del DataSet
+                adapter.Fill(ds.Alumnos);
+
+                // Verificar si hay datos
+                if (ds.Alumnos.Count == 0)
+                {
+                    MessageBox.Show("No hay alumnos registrados para mostrar en el reporte.",
+                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Obtener la ruta completa del archivo RDLC
+                string reportPath = System.IO.Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "ReportAlumnos.rdlc"
+                );
+
+                // Verificar que el archivo existe
+                if (!System.IO.File.Exists(reportPath))
+                {
+                    MessageBox.Show($"No se encontró el archivo de reporte en:\n{reportPath}\n\n" +
+                        "Asegúrate de que ReportAlumnos.rdlc esté configurado como 'Copiar siempre'.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Crear formulario para mostrar el reporte
+                Form reportForm = new Form();
+                reportForm.Text = "Reporte General de Alumnos";
+                reportForm.Size = new Size(1200, 800);
+                reportForm.StartPosition = FormStartPosition.CenterScreen;
+                reportForm.WindowState = FormWindowState.Maximized;
+
+                // Crear el LocalReport
+                LocalReport localReport = new LocalReport();
+                localReport.ReportPath = reportPath;
+
+                // Crear el ReportDataSource
+                ReportDataSource rds = new ReportDataSource("DBAlumnosDataSet", ds.Alumnos.DefaultView);
+
+                // Agregar la fuente de datos
+                localReport.DataSources.Clear();
+                localReport.DataSources.Add(rds);
+
+                // Renderizar el reporte como PDF y mostrarlo
+                byte[] reportBytes = localReport.Render("PDF");
+
+                // Guardar temporalmente el PDF
+                string tempPdfPath = System.IO.Path.Combine(
+                    System.IO.Path.GetTempPath(),
+                    $"ReporteAlumnos_{DateTime.Now:yyyyMMddHHmmss}.pdf"
+                );
+
+                System.IO.File.WriteAllBytes(tempPdfPath, reportBytes);
+
+                // Abrir el PDF con el visor predeterminado del sistema
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = tempPdfPath,
+                    UseShellExecute = true
+                });
+
+                MessageBox.Show("Reporte generado exitosamente.", "Éxito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al generar el reporte:\n{ex.Message}\n\n" +
+                    $"Tipo de error: {ex.GetType().Name}\n\n" +
+                    $"Detalles:\n{ex.StackTrace}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void RepCarrera_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // 1. OBTENER EL VALOR DE FILTRO DE LA CARRERA SELECCIONADA
+                // --------------------------------------------------------------------------------------
+                // *** ESTA LÍNEA DEBE ENLAZARSE AL CONTROL DE TU FORMULARIO (Ej. ComboBox o TextBox). ***
+                //
+                // Si tienes un ComboBox para Carreras llamado 'cmbCarreras':
+                // string carreraSeleccionada = cmbCarreras.Text; 
+                // 
+                // Si usas el valor del ComboBox:
+                // string carreraSeleccionada = cmbCarreras.SelectedValue.ToString();
+                //
+                // Sustituye la siguiente línea con la que aplique a tu control:
+                string carreraSeleccionada = "Ingeniería de Sistemas"; // << EJEMPLO
+
+                // --- Validación ---
+                if (string.IsNullOrEmpty(carreraSeleccionada))
+                {
+                    MessageBox.Show("Debe seleccionar una carrera para generar este reporte.",
+                        "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 2. PREPARAR DATOS
+                DBAlumnosDataSet ds = new DBAlumnosDataSet();
+                DBAlumnosDataSetTableAdapters.AlumnosTableAdapter adapter =
+                    new DBAlumnosDataSetTableAdapters.AlumnosTableAdapter();
+
+                // Llenar el DataSet completo (el filtro se hace en el RDLC con el parámetro).
+                adapter.Fill(ds.Alumnos);
+
+                // 3. CONFIGURAR REPORTE LOCAL
+                string reportFileName = "ReportCarrera.rdlc"; // Usar el reporte con filtro
+                string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, reportFileName);
+
+                if (!File.Exists(reportPath))
+                {
+                    MessageBox.Show($"No se encontró el archivo de reporte: {reportFileName}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                LocalReport localReport = new LocalReport();
+                localReport.ReportPath = reportPath;
+
+                // 4. AGREGAR DATASET AL REPORTE
+                localReport.DataSources.Clear();
+                localReport.DataSources.Add(new ReportDataSource("DBAlumnosDataSet", ds.Alumnos.DefaultView));
+
+                // 5. CRÍTICO: PASAR EL PARÁMETRO "Carrera"
+                // Esto le dice al RDLC qué carrera usar para filtrar y para el título.
+                ReportParameter[] parameters = new ReportParameter[1];
+                parameters[0] = new ReportParameter("Carrera", carreraSeleccionada);
+                localReport.SetParameters(parameters);
+
+                // 6. RENDERIZAR A PDF
+                byte[] reportBytes = localReport.Render("PDF");
+
+                // 7. GUARDAR Y ABRIR PDF temporal
+                string tempPdfPath = Path.Combine(
+                    Path.GetTempPath(),
+                    $"Reporte_{carreraSeleccionada}_{DateTime.Now:yyyyMMddHHmmss}.pdf"
+                );
+                File.WriteAllBytes(tempPdfPath, reportBytes);
+
+                // Abrir el PDF
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = tempPdfPath,
+                    UseShellExecute = true
+                });
+
+                MessageBox.Show($"Reporte por carrera generado exitosamente.", "Éxito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (LocalProcessingException lpe)
+            {
+                MessageBox.Show($"Error de reporte. Verifique:\n1. Que ReportCarrera.rdlc esté configurado como 'Copiar siempre' en las propiedades.\n2. Que el parámetro 'Carrera' exista en el RDLC.\nDetalle: {lpe.InnerException?.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error general al generar el reporte:\n{ex.Message}", "Error General", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }//fin
+    }
 }
