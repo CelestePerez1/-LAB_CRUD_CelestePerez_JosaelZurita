@@ -600,5 +600,127 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
                 MessageBox.Show($"Error general al generar el reporte:\n{ex.Message}", "Error General", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }//fin
+
+        private void RepMatutino_Click(object sender, EventArgs e)
+        {
+            string jornadaSeleccionada = "";
+
+            
+                jornadaSeleccionada = "Matutina";
+           
+
+            try
+            {
+                // 2. PREPARAR Y CARGAR DATOS (¡FILTRADO!)
+                DBAlumnosDataSet ds = new DBAlumnosDataSet();
+                DBAlumnosDataSetTableAdapters.AlumnosTableAdapter adapter =
+                    new DBAlumnosDataSetTableAdapters.AlumnosTableAdapter();
+
+                // *** CAMBIO CRÍTICO: Carga solo los datos de la Matutina ***
+                //
+                // NOTA: Recuerda que el método 'FillByJornada' debe existir en tu TableAdapter
+                //       y usar la consulta SQL filtrada (WHERE Jornada = @Jornada).
+                //
+                adapter.FillByJornada(ds.Alumnos, jornadaSeleccionada);
+
+                // -------------------------------------------------------------------------
+
+                // 3. CONFIGURAR Y ENVIAR PARÁMETROS (para el TÍTULO)
+                string reportFileName = "ReportJornada.rdlc";
+                string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, reportFileName);
+
+                LocalReport localReport = new LocalReport();
+                localReport.ReportPath = reportPath;
+                localReport.DataSources.Clear();
+
+                // El reporte ahora recibe la fuente de datos que *YA ESTÁ FILTRADA*
+                localReport.DataSources.Add(new ReportDataSource("DBAlumnosDataSet", ds.Alumnos.DefaultView));
+
+                // Pasamos el parámetro para que el título diga: REPORTE DE ALUMNOS: JORNADA MATUTINA
+                ReportParameter[] parameters = new ReportParameter[1];
+                parameters[0] = new ReportParameter("Jornada", jornadaSeleccionada);
+                localReport.SetParameters(parameters);
+
+                // 4. Renderizar y Abrir PDF
+                byte[] reportBytes = localReport.Render("PDF");
+                string tempPdfPath = Path.Combine(Path.GetTempPath(), $"Reporte_{jornadaSeleccionada}_{DateTime.Now:yyyyMMddHHmmss}.pdf");
+                File.WriteAllBytes(tempPdfPath, reportBytes);
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = tempPdfPath,
+                    UseShellExecute = true
+                });
+
+                MessageBox.Show($"Reporte de la jornada '{jornadaSeleccionada}' generado.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al generar el reporte:\n{ex.Message}", "Error General", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void RepVespertino_Click(object sender, EventArgs e)
+        {
+            // Usamos el RadioButton rbtVis, renombrado aquí como rbtVespertina para claridad.
+            // **Asegúrate de que este nombre (rbtVespertina) coincida con el nombre real de tu control.**
+
+            string jornadaSeleccionada = "";
+
+            // 1. OBTENER EL VALOR DE FILTRO
+            
+                jornadaSeleccionada = "Vespertina";
+           
+
+            try
+            {
+                // 2. PREPARAR Y CARGAR DATOS (¡EL CAMBIO CRÍTICO!)
+                DBAlumnosDataSet ds = new DBAlumnosDataSet();
+                DBAlumnosDataSetTableAdapters.AlumnosTableAdapter adapter =
+                    new DBAlumnosDataSetTableAdapters.AlumnosTableAdapter();
+
+                // *** LÍNEA CORREGIDA: Usamos un método FillBy para cargar SOLO los alumnos filtrados. ***
+                //
+                // NOTA: Si el método 'FillByJornada' no existe, debes crearlo en tu diseñador de DataSet
+                //       (DBAlumnosDataSet.xsd) con la consulta: SELECT * FROM Alumnos WHERE Jornada = @Jornada
+                //
+                adapter.FillByJornada(ds.Alumnos, jornadaSeleccionada);
+
+                // ------------------------------------------------------------------------------------------
+
+                // 3. CONFIGURAR Y ENVIAR PARÁMETROS (para el TÍTULO del reporte)
+                string reportFileName = "ReportJornada.rdlc";
+                string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, reportFileName);
+
+                LocalReport localReport = new LocalReport();
+                localReport.ReportPath = reportPath;
+                localReport.DataSources.Clear();
+
+                // El reporte ahora recibe la fuente de datos (ds.Alumnos) que *YA ESTÁ FILTRADA*
+                localReport.DataSources.Add(new ReportDataSource("DBAlumnosDataSet", ds.Alumnos.DefaultView));
+
+                // Pasamos el parámetro solo para que el título se actualice: REPORTE DE ALUMNOS: JORNADA VESPERTINA
+                ReportParameter[] parameters = new ReportParameter[1];
+                parameters[0] = new ReportParameter("Jornada", jornadaSeleccionada);
+                localReport.SetParameters(parameters);
+
+                // 4. Renderizar y Abrir PDF
+                byte[] reportBytes = localReport.Render("PDF");
+                string tempPdfPath = Path.Combine(Path.GetTempPath(), $"Reporte_{jornadaSeleccionada}_{DateTime.Now:yyyyMMddHHmmss}.pdf");
+                File.WriteAllBytes(tempPdfPath, reportBytes);
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = tempPdfPath,
+                    UseShellExecute = true
+                });
+
+                MessageBox.Show($"Reporte de la jornada '{jornadaSeleccionada}' generado.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al generar el reporte:\n{ex.Message}", "Error General", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

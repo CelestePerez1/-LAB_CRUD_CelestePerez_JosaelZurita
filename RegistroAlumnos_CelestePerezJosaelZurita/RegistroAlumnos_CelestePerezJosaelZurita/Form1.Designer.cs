@@ -37,6 +37,8 @@
             label10 = new Label();
             listBox1 = new ListBox();
             panel1 = new Panel();
+            RepMatutino = new Button();
+            RepCarrera = new Button();
             RepGeneral = new Button();
             panel4 = new Panel();
             txtContAlumno = new TextBox();
@@ -72,7 +74,7 @@
             panel7 = new Panel();
             txtBuscar = new TextBox();
             btnBuscar = new Button();
-            RepCarrera = new Button();
+            RepVespertino = new Button();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
@@ -166,6 +168,8 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(RepVespertino);
+            panel1.Controls.Add(RepMatutino);
             panel1.Controls.Add(RepCarrera);
             panel1.Controls.Add(RepGeneral);
             panel1.Controls.Add(panel4);
@@ -175,6 +179,26 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1266, 231);
             panel1.TabIndex = 26;
+            // 
+            // RepMatutino
+            // 
+            RepMatutino.Location = new Point(419, 187);
+            RepMatutino.Name = "RepMatutino";
+            RepMatutino.Size = new Size(151, 29);
+            RepMatutino.TabIndex = 91;
+            RepMatutino.Text = "ReportMatutino";
+            RepMatutino.UseVisualStyleBackColor = true;
+            RepMatutino.Click += RepMatutino_Click;
+            // 
+            // RepCarrera
+            // 
+            RepCarrera.Location = new Point(237, 187);
+            RepCarrera.Name = "RepCarrera";
+            RepCarrera.Size = new Size(173, 29);
+            RepCarrera.TabIndex = 90;
+            RepCarrera.Text = "Reporte por Carrera";
+            RepCarrera.UseVisualStyleBackColor = true;
+            RepCarrera.Click += RepCarrera_Click;
             // 
             // RepGeneral
             // 
@@ -550,15 +574,15 @@
             btnBuscar.UseVisualStyleBackColor = false;
             btnBuscar.Click += btnBuscar_Click;
             // 
-            // RepCarrera
+            // RepVespertino
             // 
-            RepCarrera.Location = new Point(237, 187);
-            RepCarrera.Name = "RepCarrera";
-            RepCarrera.Size = new Size(173, 29);
-            RepCarrera.TabIndex = 90;
-            RepCarrera.Text = "Reporte por Carrera";
-            RepCarrera.UseVisualStyleBackColor = true;
-            RepCarrera.Click += RepCarrera_Click;
+            RepVespertino.Location = new Point(576, 187);
+            RepVespertino.Name = "RepVespertino";
+            RepVespertino.Size = new Size(161, 29);
+            RepVespertino.TabIndex = 92;
+            RepVespertino.Text = "JornadaVespertina";
+            RepVespertino.UseVisualStyleBackColor = true;
+            RepVespertino.Click += RepVespertino_Click;
             // 
             // Form1
             // 
@@ -640,5 +664,7 @@
         private Button btnBuscar;
         private Button RepGeneral;
         private Button RepCarrera;
+        private Button RepMatutino;
+        private Button RepVespertino;
     }
 }
