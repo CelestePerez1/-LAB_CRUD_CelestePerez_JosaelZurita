@@ -4,12 +4,12 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection ConnectionStringObject="Data Source=JOSAEL\SQLEXPRESS;Initial Catalog=DBAlumnos;Persist Security Info=True;User ID=sa;Password=Locura060425;TrustServerCertificate=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="josael\sqlexpress.DBAlumnos.dbo" ParameterPrefix="@" Provider="System.Data.SqlClient" />
+          <Connection ConnectionStringObject="Data Source=CC\SQLDEVELOPER1;Initial Catalog=DBAlumnos;User ID=cc;Password=celeste12*U;Encrypt=False" IsAppSettingsProperty="false" Modifier="Assembly" Name="cc\SQLDEVELOPER1.DBAlumnos.dbo" ParameterPrefix="@" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AlumnosTableAdapter" GeneratorDataComponentClassName="AlumnosTableAdapter" Name="Alumnos" UserDataComponentName="AlumnosTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="josael\sqlexpress.DBAlumnos.dbo" DbObjectName="DBAlumnos.dbo.Alumnos" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="cc\SQLDEVELOPER1.DBAlumnos.dbo" DbObjectName="DBAlumnos.dbo.Alumnos" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Alumnos] WHERE (([Id] = @Original_Id) AND ((@IsNull_Nombre = 1 AND [Nombre] IS NULL) OR ([Nombre] = @Original_Nombre)) AND ((@IsNull_Cedula = 1 AND [Cedula] IS NULL) OR ([Cedula] = @Original_Cedula)) AND ((@IsNull_Carrera = 1 AND [Carrera] IS NULL) OR ([Carrera] = @Original_Carrera)) AND ((@IsNull_Semestre = 1 AND [Semestre] IS NULL) OR ([Semestre] = @Original_Semestre)) AND ((@IsNull_Jornada = 1 AND [Jornada] IS NULL) OR ([Jornada] = @Original_Jornada)) AND ((@IsNull_Usuario = 1 AND [Usuario] IS NULL) OR ([Usuario] = @Original_Usuario)) AND ((@IsNull_Contrasena = 1 AND [Contrasena] IS NULL) OR ([Contrasena] = @Original_Contrasena)) AND ((@IsNull_RecibirNotificaciones = 1 AND [RecibirNotificaciones] IS NULL) OR ([RecibirNotificaciones] = @Original_RecibirNotificaciones)) AND ((@IsNull_FechaRegistro = 1 AND [FechaRegistro] IS NULL) OR ([FechaRegistro] = @Original_FechaRegistro)))</CommandText>
@@ -111,7 +111,7 @@ SELECT Id, Nombre, Cedula, Carrera, Semestre, Jornada, Usuario, Contrasena, Reci
               <Mapping SourceColumn="FechaRegistro" DataSetColumn="FechaRegistro" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="josael\sqlexpress.DBAlumnos.dbo" DbObjectName="DBAlumnos.dbo.Alumnos" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByJornada" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByJornada" GeneratorSourceName="FillByJornada" GetMethodModifier="Public" GetMethodName="GetDataByJornada" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByJornada" UserSourceName="FillByJornada">
+              <DbSource ConnectionRef="cc\SQLDEVELOPER1.DBAlumnos.dbo" DbObjectName="DBAlumnos.dbo.Alumnos" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByJornada" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByJornada" GeneratorSourceName="FillByJornada" GetMethodModifier="Public" GetMethodName="GetDataByJornada" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByJornada" UserSourceName="FillByJornada">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT Id, Nombre, Cedula, Carrera, Semestre, Jornada, Usuario, Contrasena, RecibirNotificaciones, FechaRegistro 
@@ -133,61 +133,61 @@ WHERE Jornada = @Jornada</CommandText>
   <xs:element name="DBAlumnosDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DBAlumnosDataSet" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DBAlumnosDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Alumnos" msprop:Generator_RowClassName="AlumnosRow" msprop:Generator_RowEvHandlerName="AlumnosRowChangeEventHandler" msprop:Generator_RowDeletedName="AlumnosRowDeleted" msprop:Generator_RowDeletingName="AlumnosRowDeleting" msprop:Generator_RowEvArgName="AlumnosRowChangeEvent" msprop:Generator_TablePropName="Alumnos" msprop:Generator_RowChangedName="AlumnosRowChanged" msprop:Generator_UserTableName="Alumnos" msprop:Generator_RowChangingName="AlumnosRowChanging" msprop:Generator_TableClassName="AlumnosDataTable" msprop:Generator_TableVarName="tableAlumnos">
+        <xs:element name="Alumnos" msprop:Generator_RowEvHandlerName="AlumnosRowChangeEventHandler" msprop:Generator_RowDeletedName="AlumnosRowDeleted" msprop:Generator_RowDeletingName="AlumnosRowDeleting" msprop:Generator_RowEvArgName="AlumnosRowChangeEvent" msprop:Generator_TablePropName="Alumnos" msprop:Generator_RowChangedName="AlumnosRowChanged" msprop:Generator_UserTableName="Alumnos" msprop:Generator_RowChangingName="AlumnosRowChanging" msprop:Generator_RowClassName="AlumnosRow" msprop:Generator_TableClassName="AlumnosDataTable" msprop:Generator_TableVarName="tableAlumnos">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnVarNameInTable="columnId" type="xs:int" />
-              <xs:element name="Nombre" msprop:Generator_UserColumnName="Nombre" msprop:Generator_ColumnPropNameInTable="NombreColumn" msprop:Generator_ColumnPropNameInRow="Nombre" msprop:Generator_ColumnVarNameInTable="columnNombre" minOccurs="0">
+              <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_UserColumnName="Id" msprop:Generator_ColumnVarNameInTable="columnId" type="xs:int" />
+              <xs:element name="Nombre" msprop:Generator_ColumnPropNameInTable="NombreColumn" msprop:Generator_ColumnPropNameInRow="Nombre" msprop:Generator_UserColumnName="Nombre" msprop:Generator_ColumnVarNameInTable="columnNombre" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Cedula" msprop:Generator_UserColumnName="Cedula" msprop:Generator_ColumnPropNameInTable="CedulaColumn" msprop:Generator_ColumnPropNameInRow="Cedula" msprop:Generator_ColumnVarNameInTable="columnCedula" minOccurs="0">
+              <xs:element name="Cedula" msprop:Generator_ColumnPropNameInTable="CedulaColumn" msprop:Generator_ColumnPropNameInRow="Cedula" msprop:Generator_UserColumnName="Cedula" msprop:Generator_ColumnVarNameInTable="columnCedula" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Carrera" msprop:Generator_UserColumnName="Carrera" msprop:Generator_ColumnPropNameInTable="CarreraColumn" msprop:Generator_ColumnPropNameInRow="Carrera" msprop:Generator_ColumnVarNameInTable="columnCarrera" minOccurs="0">
+              <xs:element name="Carrera" msprop:Generator_ColumnPropNameInTable="CarreraColumn" msprop:Generator_ColumnPropNameInRow="Carrera" msprop:Generator_UserColumnName="Carrera" msprop:Generator_ColumnVarNameInTable="columnCarrera" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Semestre" msprop:Generator_UserColumnName="Semestre" msprop:Generator_ColumnPropNameInTable="SemestreColumn" msprop:Generator_ColumnPropNameInRow="Semestre" msprop:Generator_ColumnVarNameInTable="columnSemestre" minOccurs="0">
+              <xs:element name="Semestre" msprop:Generator_ColumnPropNameInTable="SemestreColumn" msprop:Generator_ColumnPropNameInRow="Semestre" msprop:Generator_UserColumnName="Semestre" msprop:Generator_ColumnVarNameInTable="columnSemestre" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Jornada" msprop:Generator_UserColumnName="Jornada" msprop:Generator_ColumnPropNameInTable="JornadaColumn" msprop:Generator_ColumnPropNameInRow="Jornada" msprop:Generator_ColumnVarNameInTable="columnJornada" minOccurs="0">
+              <xs:element name="Jornada" msprop:Generator_ColumnPropNameInTable="JornadaColumn" msprop:Generator_ColumnPropNameInRow="Jornada" msprop:Generator_UserColumnName="Jornada" msprop:Generator_ColumnVarNameInTable="columnJornada" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Usuario" msprop:Generator_UserColumnName="Usuario" msprop:Generator_ColumnPropNameInTable="UsuarioColumn" msprop:Generator_ColumnPropNameInRow="Usuario" msprop:Generator_ColumnVarNameInTable="columnUsuario" minOccurs="0">
+              <xs:element name="Usuario" msprop:Generator_ColumnPropNameInTable="UsuarioColumn" msprop:Generator_ColumnPropNameInRow="Usuario" msprop:Generator_UserColumnName="Usuario" msprop:Generator_ColumnVarNameInTable="columnUsuario" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Contrasena" msprop:Generator_UserColumnName="Contrasena" msprop:Generator_ColumnPropNameInTable="ContrasenaColumn" msprop:Generator_ColumnPropNameInRow="Contrasena" msprop:Generator_ColumnVarNameInTable="columnContrasena" minOccurs="0">
+              <xs:element name="Contrasena" msprop:Generator_ColumnPropNameInTable="ContrasenaColumn" msprop:Generator_ColumnPropNameInRow="Contrasena" msprop:Generator_UserColumnName="Contrasena" msprop:Generator_ColumnVarNameInTable="columnContrasena" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="RecibirNotificaciones" msprop:Generator_UserColumnName="RecibirNotificaciones" msprop:Generator_ColumnPropNameInTable="RecibirNotificacionesColumn" msprop:Generator_ColumnPropNameInRow="RecibirNotificaciones" msprop:Generator_ColumnVarNameInTable="columnRecibirNotificaciones" type="xs:boolean" minOccurs="0" />
-              <xs:element name="FechaRegistro" msprop:Generator_UserColumnName="FechaRegistro" msprop:Generator_ColumnPropNameInTable="FechaRegistroColumn" msprop:Generator_ColumnPropNameInRow="FechaRegistro" msprop:Generator_ColumnVarNameInTable="columnFechaRegistro" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RecibirNotificaciones" msprop:Generator_ColumnPropNameInTable="RecibirNotificacionesColumn" msprop:Generator_ColumnPropNameInRow="RecibirNotificaciones" msprop:Generator_UserColumnName="RecibirNotificaciones" msprop:Generator_ColumnVarNameInTable="columnRecibirNotificaciones" type="xs:boolean" minOccurs="0" />
+              <xs:element name="FechaRegistro" msprop:Generator_ColumnPropNameInTable="FechaRegistroColumn" msprop:Generator_ColumnPropNameInRow="FechaRegistro" msprop:Generator_UserColumnName="FechaRegistro" msprop:Generator_ColumnVarNameInTable="columnFechaRegistro" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
