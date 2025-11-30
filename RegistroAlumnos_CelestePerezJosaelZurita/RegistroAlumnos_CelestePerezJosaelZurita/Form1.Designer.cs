@@ -37,6 +37,10 @@
             label10 = new Label();
             listBox1 = new ListBox();
             panel1 = new Panel();
+            dtFechaHasta = new DateTimePicker();
+            dtFechaDesde = new DateTimePicker();
+            RepFecha = new Button();
+            RepVespertino = new Button();
             RepMatutino = new Button();
             RepCarrera = new Button();
             RepGeneral = new Button();
@@ -74,7 +78,6 @@
             panel7 = new Panel();
             txtBuscar = new TextBox();
             btnBuscar = new Button();
-            RepVespertino = new Button();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
@@ -168,6 +171,9 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(dtFechaHasta);
+            panel1.Controls.Add(dtFechaDesde);
+            panel1.Controls.Add(RepFecha);
             panel1.Controls.Add(RepVespertino);
             panel1.Controls.Add(RepMatutino);
             panel1.Controls.Add(RepCarrera);
@@ -177,12 +183,46 @@
             panel1.Controls.Add(listBox1);
             panel1.Location = new Point(32, 535);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1266, 231);
+            panel1.Size = new Size(1266, 302);
             panel1.TabIndex = 26;
+            // 
+            // dtFechaHasta
+            // 
+            dtFechaHasta.Location = new Point(636, 240);
+            dtFechaHasta.Name = "dtFechaHasta";
+            dtFechaHasta.Size = new Size(250, 27);
+            dtFechaHasta.TabIndex = 95;
+            // 
+            // dtFechaDesde
+            // 
+            dtFechaDesde.Location = new Point(636, 187);
+            dtFechaDesde.Name = "dtFechaDesde";
+            dtFechaDesde.Size = new Size(250, 27);
+            dtFechaDesde.TabIndex = 94;
+            // 
+            // RepFecha
+            // 
+            RepFecha.Location = new Point(443, 187);
+            RepFecha.Name = "RepFecha";
+            RepFecha.Size = new Size(152, 29);
+            RepFecha.TabIndex = 93;
+            RepFecha.Text = "Reporte por Fecha";
+            RepFecha.UseVisualStyleBackColor = true;
+            RepFecha.Click += RepFecha_Click;
+            // 
+            // RepVespertino
+            // 
+            RepVespertino.Location = new Point(263, 238);
+            RepVespertino.Name = "RepVespertino";
+            RepVespertino.Size = new Size(161, 29);
+            RepVespertino.TabIndex = 92;
+            RepVespertino.Text = "JornadaVespertina";
+            RepVespertino.UseVisualStyleBackColor = true;
+            RepVespertino.Click += RepVespertino_Click;
             // 
             // RepMatutino
             // 
-            RepMatutino.Location = new Point(419, 187);
+            RepMatutino.Location = new Point(263, 187);
             RepMatutino.Name = "RepMatutino";
             RepMatutino.Size = new Size(151, 29);
             RepMatutino.TabIndex = 91;
@@ -192,7 +232,7 @@
             // 
             // RepCarrera
             // 
-            RepCarrera.Location = new Point(237, 187);
+            RepCarrera.Location = new Point(62, 238);
             RepCarrera.Name = "RepCarrera";
             RepCarrera.Size = new Size(173, 29);
             RepCarrera.TabIndex = 90;
@@ -574,23 +614,13 @@
             btnBuscar.UseVisualStyleBackColor = false;
             btnBuscar.Click += btnBuscar_Click;
             // 
-            // RepVespertino
-            // 
-            RepVespertino.Location = new Point(576, 187);
-            RepVespertino.Name = "RepVespertino";
-            RepVespertino.Size = new Size(161, 29);
-            RepVespertino.TabIndex = 92;
-            RepVespertino.Text = "JornadaVespertina";
-            RepVespertino.UseVisualStyleBackColor = true;
-            RepVespertino.Click += RepVespertino_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.FromArgb(192, 192, 255);
-            ClientSize = new Size(1351, 763);
+            ClientSize = new Size(1351, 849);
             Controls.Add(panel7);
             Controls.Add(button1);
             Controls.Add(panel6);
@@ -666,5 +696,8 @@
         private Button RepCarrera;
         private Button RepMatutino;
         private Button RepVespertino;
+        private DateTimePicker dtFechaHasta;
+        private DateTimePicker dtFechaDesde;
+        private Button RepFecha;
     }
 }
