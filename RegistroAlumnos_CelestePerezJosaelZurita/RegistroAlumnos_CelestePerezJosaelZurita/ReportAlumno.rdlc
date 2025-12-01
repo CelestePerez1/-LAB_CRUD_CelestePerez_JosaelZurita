@@ -21,8 +21,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.35137cm</Top>
-        <Left>8.8462cm</Left>
+        <Top>0.5842cm</Top>
+        <Left>9.85987cm</Left>
         <Height>0.81167cm</Height>
         <Width>6.33117cm</Width>
         <Style>
@@ -54,19 +54,19 @@
               <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.39417cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.16133cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>3.74883cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>3.643cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -83,7 +83,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Id</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -114,7 +116,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Nombre</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -145,7 +149,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Cedula</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -176,7 +182,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Carrera</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -207,7 +215,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Semestre</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -238,7 +248,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Jornada</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -269,7 +281,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Usuario</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -300,7 +314,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Contrasena</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -331,7 +347,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Recibir Notificaciones</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -362,7 +380,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Fecha Registro</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -718,9 +738,9 @@
         </TablixRowHierarchy>
         <DataSetName>DBAlumnosDataSet</DataSetName>
         <Top>2.8702cm</Top>
-        <Left>0.36553cm</Left>
+        <Left>1.27803cm</Left>
         <Height>1.2cm</Height>
-        <Width>23.58183cm</Width>
+        <Width>25.52917cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -728,11 +748,41 @@
           </Border>
         </Style>
       </Tablix>
+      <Textbox Name="Textbox23">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Sistema de registro de alumnos</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox23</rd:DefaultName>
+        <Top>1.57226cm</Top>
+        <Left>10.26437cm</Left>
+        <Height>0.6cm</Height>
+        <Width>5.294cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>2in</Height>
     <Style />
   </Body>
-  <Width>10.18085in</Width>
+  <Width>10.55402in</Width>
   <Page>
     <PageFooter>
       <Height>2.54cm</Height>
@@ -775,8 +825,8 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
+    <PageHeight>20cm</PageHeight>
+    <PageWidth>31cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
     <TopMargin>2cm</TopMargin>

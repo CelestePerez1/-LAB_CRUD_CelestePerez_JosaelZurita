@@ -37,6 +37,7 @@
             label10 = new Label();
             listBox1 = new ListBox();
             panel1 = new Panel();
+            label11 = new Label();
             Alumnobt = new Button();
             dtFechaHasta = new DateTimePicker();
             dtFechaDesde = new DateTimePicker();
@@ -79,7 +80,6 @@
             panel7 = new Panel();
             txtBuscar = new TextBox();
             btnBuscar = new Button();
-            label11 = new Label();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
@@ -189,6 +189,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1266, 329);
             panel1.TabIndex = 26;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.Location = new Point(31, 194);
+            label11.Name = "label11";
+            label11.Size = new Size(78, 23);
+            label11.TabIndex = 97;
+            label11.Text = "Reportes";
             // 
             // Alumnobt
             // 
@@ -372,14 +382,15 @@
             panel6.AutoScroll = true;
             panel6.BackColor = Color.White;
             panel6.Controls.Add(btnEliminar);
-            panel6.Controls.Add(btnSalir2);
+            panel6.Controls.Add(txtBuscar);
+            panel6.Controls.Add(btnBuscar);
             panel6.Controls.Add(btnEditar);
             panel6.Controls.Add(btnAyuda);
             panel6.Controls.Add(btnNuevo2);
             panel6.Controls.Add(btnGua2);
             panel6.Location = new Point(96, 98);
             panel6.Name = "panel6";
-            panel6.Size = new Size(826, 68);
+            panel6.Size = new Size(1055, 68);
             panel6.TabIndex = 5;
             // 
             // btnEliminar
@@ -394,12 +405,15 @@
             // 
             // btnSalir2
             // 
-            btnSalir2.Location = new Point(677, 17);
+            btnSalir2.BackColor = Color.Salmon;
+            btnSalir2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSalir2.ForeColor = SystemColors.ButtonHighlight;
+            btnSalir2.Location = new Point(15, 17);
             btnSalir2.Name = "btnSalir2";
             btnSalir2.Size = new Size(126, 36);
             btnSalir2.TabIndex = 1;
             btnSalir2.Text = "Salir";
-            btnSalir2.UseVisualStyleBackColor = true;
+            btnSalir2.UseVisualStyleBackColor = false;
             btnSalir2.Click += button3_Click;
             // 
             // btnEditar
@@ -607,17 +621,16 @@
             // panel7
             // 
             panel7.BackColor = Color.White;
-            panel7.Controls.Add(txtBuscar);
-            panel7.Controls.Add(btnBuscar);
-            panel7.Location = new Point(928, 96);
+            panel7.Controls.Add(btnSalir2);
+            panel7.Location = new Point(1157, 98);
             panel7.Name = "panel7";
-            panel7.Size = new Size(366, 71);
+            panel7.Size = new Size(147, 71);
             panel7.TabIndex = 79;
             // 
             // txtBuscar
             // 
             txtBuscar.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtBuscar.Location = new Point(16, 17);
+            txtBuscar.Location = new Point(697, 17);
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(213, 38);
             txtBuscar.TabIndex = 25;
@@ -625,23 +638,13 @@
             // btnBuscar
             // 
             btnBuscar.BackColor = Color.FromArgb(255, 255, 128);
-            btnBuscar.Location = new Point(235, 19);
+            btnBuscar.Location = new Point(916, 17);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(126, 36);
             btnBuscar.TabIndex = 24;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = false;
             btnBuscar.Click += btnBuscar_Click;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.Location = new Point(31, 194);
-            label11.Name = "label11";
-            label11.Size = new Size(78, 23);
-            label11.TabIndex = 97;
-            label11.Text = "Reportes";
             // 
             // Form1
             // 
@@ -668,12 +671,12 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel6.ResumeLayout(false);
+            panel6.PerformLayout();
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel7.ResumeLayout(false);
-            panel7.PerformLayout();
             ResumeLayout(false);
         }
 
