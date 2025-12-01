@@ -37,6 +37,7 @@
             label10 = new Label();
             listBox1 = new ListBox();
             panel1 = new Panel();
+            Alumnobt = new Button();
             dtFechaHasta = new DateTimePicker();
             dtFechaDesde = new DateTimePicker();
             RepFecha = new Button();
@@ -78,6 +79,7 @@
             panel7 = new Panel();
             txtBuscar = new TextBox();
             btnBuscar = new Button();
+            label11 = new Label();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
@@ -171,6 +173,8 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(label11);
+            panel1.Controls.Add(Alumnobt);
             panel1.Controls.Add(dtFechaHasta);
             panel1.Controls.Add(dtFechaDesde);
             panel1.Controls.Add(RepFecha);
@@ -183,26 +187,37 @@
             panel1.Controls.Add(listBox1);
             panel1.Location = new Point(32, 535);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1266, 302);
+            panel1.Size = new Size(1266, 329);
             panel1.TabIndex = 26;
+            // 
+            // Alumnobt
+            // 
+            Alumnobt.BackColor = Color.FromArgb(255, 255, 128);
+            Alumnobt.Location = new Point(419, 227);
+            Alumnobt.Name = "Alumnobt";
+            Alumnobt.Size = new Size(161, 29);
+            Alumnobt.TabIndex = 96;
+            Alumnobt.Text = "ReportPerfil";
+            Alumnobt.UseVisualStyleBackColor = false;
+            Alumnobt.Click += Alumnobt_Click;
             // 
             // dtFechaHasta
             // 
-            dtFechaHasta.Location = new Point(636, 240);
+            dtFechaHasta.Location = new Point(829, 280);
             dtFechaHasta.Name = "dtFechaHasta";
             dtFechaHasta.Size = new Size(250, 27);
             dtFechaHasta.TabIndex = 95;
             // 
             // dtFechaDesde
             // 
-            dtFechaDesde.Location = new Point(636, 187);
+            dtFechaDesde.Location = new Point(829, 227);
             dtFechaDesde.Name = "dtFechaDesde";
             dtFechaDesde.Size = new Size(250, 27);
             dtFechaDesde.TabIndex = 94;
             // 
             // RepFecha
             // 
-            RepFecha.Location = new Point(443, 187);
+            RepFecha.Location = new Point(636, 227);
             RepFecha.Name = "RepFecha";
             RepFecha.Size = new Size(152, 29);
             RepFecha.TabIndex = 93;
@@ -212,42 +227,46 @@
             // 
             // RepVespertino
             // 
-            RepVespertino.Location = new Point(263, 238);
+            RepVespertino.BackColor = Color.FromArgb(255, 255, 128);
+            RepVespertino.Location = new Point(232, 281);
             RepVespertino.Name = "RepVespertino";
             RepVespertino.Size = new Size(161, 29);
             RepVespertino.TabIndex = 92;
             RepVespertino.Text = "JornadaVespertina";
-            RepVespertino.UseVisualStyleBackColor = true;
+            RepVespertino.UseVisualStyleBackColor = false;
             RepVespertino.Click += RepVespertino_Click;
             // 
             // RepMatutino
             // 
-            RepMatutino.Location = new Point(263, 187);
+            RepMatutino.BackColor = Color.FromArgb(255, 255, 128);
+            RepMatutino.Location = new Point(232, 227);
             RepMatutino.Name = "RepMatutino";
-            RepMatutino.Size = new Size(151, 29);
+            RepMatutino.Size = new Size(161, 29);
             RepMatutino.TabIndex = 91;
             RepMatutino.Text = "ReportMatutino";
-            RepMatutino.UseVisualStyleBackColor = true;
+            RepMatutino.UseVisualStyleBackColor = false;
             RepMatutino.Click += RepMatutino_Click;
             // 
             // RepCarrera
             // 
-            RepCarrera.Location = new Point(62, 238);
+            RepCarrera.BackColor = Color.FromArgb(255, 255, 128);
+            RepCarrera.Location = new Point(31, 281);
             RepCarrera.Name = "RepCarrera";
             RepCarrera.Size = new Size(173, 29);
             RepCarrera.TabIndex = 90;
             RepCarrera.Text = "Reporte por Carrera";
-            RepCarrera.UseVisualStyleBackColor = true;
+            RepCarrera.UseVisualStyleBackColor = false;
             RepCarrera.Click += RepCarrera_Click;
             // 
             // RepGeneral
             // 
-            RepGeneral.Location = new Point(62, 187);
+            RepGeneral.BackColor = Color.FromArgb(255, 255, 128);
+            RepGeneral.Location = new Point(31, 227);
             RepGeneral.Name = "RepGeneral";
-            RepGeneral.Size = new Size(158, 29);
+            RepGeneral.Size = new Size(173, 29);
             RepGeneral.TabIndex = 89;
             RepGeneral.Text = "Reporte General";
-            RepGeneral.UseVisualStyleBackColor = true;
+            RepGeneral.UseVisualStyleBackColor = false;
             RepGeneral.Click += RepGeneral_Click;
             // 
             // panel4
@@ -614,13 +633,23 @@
             btnBuscar.UseVisualStyleBackColor = false;
             btnBuscar.Click += btnBuscar_Click;
             // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.Location = new Point(31, 194);
+            label11.Name = "label11";
+            label11.Size = new Size(78, 23);
+            label11.TabIndex = 97;
+            label11.Text = "Reportes";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.FromArgb(192, 192, 255);
-            ClientSize = new Size(1351, 849);
+            ClientSize = new Size(1351, 864);
             Controls.Add(panel7);
             Controls.Add(button1);
             Controls.Add(panel6);
@@ -699,5 +728,7 @@
         private DateTimePicker dtFechaHasta;
         private DateTimePicker dtFechaDesde;
         private Button RepFecha;
+        private Button Alumnobt;
+        private Label label11;
     }
 }

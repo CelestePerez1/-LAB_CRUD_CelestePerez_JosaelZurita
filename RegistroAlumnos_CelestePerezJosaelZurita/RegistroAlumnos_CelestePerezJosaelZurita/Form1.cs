@@ -792,5 +792,89 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
                 MessageBox.Show(errorMessage, "Error de Reporte", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void Alumnobt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (idActual == 0)
+                {
+                    MessageBox.Show("Debe seleccionar un alumno de la lista primero.",
+                        "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Instancias del DataSet y TableAdapter
+                DBAlumnosDataSet ds = new DBAlumnosDataSet();
+                DBAlumnosDataSetTableAdapters.AlumnosTableAdapter adapter =
+                    new DBAlumnosDataSetTableAdapters.AlumnosTableAdapter();
+
+                // Llenar SOLO el alumno seleccionado
+                adapter.FillByID(ds.Alumnos, idActual);
+
+                // Validar si realmente tiene datos
+                if (ds.Alumnos.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron datos del alumno.",
+                        "Sin datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Ruta del RDLC
+                string reportPath = System.IO.Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "ReportAlumno.rdlc"
+                );
+
+                if (!System.IO.File.Exists(reportPath))
+                {
+                    MessageBox.Show($"No se encontró el archivo RDLC:\n{reportPath}\n" +
+                        "Configura el archivo como 'Copiar siempre'.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Crear el reporte local
+                LocalReport localReport = new LocalReport();
+                localReport.ReportPath = reportPath;
+
+                // Fuente de datos del reporte
+                ReportDataSource rds = new ReportDataSource(
+                    "DBAlumnosDataSet",
+                    ds.Alumnos.DefaultView
+                );
+
+                localReport.DataSources.Clear();
+                localReport.DataSources.Add(rds);
+
+                // Renderizar a PDF
+                byte[] pdfBytes = localReport.Render("PDF");
+
+                // Guardar archivo temporal
+                string tempPdfPath = Path.Combine(
+                    Path.GetTempPath(),
+                    $"ReporteAlumno_{idActual}_{DateTime.Now:yyyyMMddHHmmss}.pdf");
+
+                File.WriteAllBytes(tempPdfPath, pdfBytes);
+
+                // Abrir PDF
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = tempPdfPath,
+                    UseShellExecute = true
+                });
+
+                MessageBox.Show("Reporte del alumno generado correctamente.",
+                    "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error generando el reporte:\n{ex.Message}\n\n{ex.StackTrace}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
     }
 }

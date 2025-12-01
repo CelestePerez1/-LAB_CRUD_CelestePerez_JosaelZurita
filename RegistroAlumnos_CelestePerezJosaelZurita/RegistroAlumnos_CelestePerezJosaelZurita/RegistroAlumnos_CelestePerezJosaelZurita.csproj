@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient.SNI.runtime" Version="6.0.2" />
-    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms" Version="150.1652.0" />
     <PackageReference Include="Microsoft.SqlServer.Server" Version="1.0.0" />
     <PackageReference Include="Microsoft.SqlServer.Types" Version="170.1000.7" />
     <PackageReference Include="ReportViewerCore.NETCore" Version="15.1.26" />
@@ -39,6 +38,9 @@
     <None Update="DBAlumnosDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DBAlumnosDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="ReportAlumno.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ReportAlumnos.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
