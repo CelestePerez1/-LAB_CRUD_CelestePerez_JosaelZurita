@@ -57,11 +57,13 @@
             label1 = new Label();
             panel6 = new Panel();
             btnEliminar = new Button();
-            btnSalir2 = new Button();
+            txtBuscar = new TextBox();
+            btnBuscar = new Button();
             btnEditar = new Button();
             btnAyuda = new Button();
             btnNuevo2 = new Button();
             btnGua2 = new Button();
+            btnSalir2 = new Button();
             panel5 = new Panel();
             label13 = new Label();
             rbtVis = new RadioButton();
@@ -78,8 +80,8 @@
             panel3 = new Panel();
             button1 = new Button();
             panel7 = new Panel();
-            txtBuscar = new TextBox();
-            btnBuscar = new Button();
+            label14 = new Label();
+            label15 = new Label();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
@@ -143,7 +145,7 @@
             btnGua1.Name = "btnGua1";
             btnGua1.Size = new Size(142, 36);
             btnGua1.TabIndex = 5;
-            btnGua1.Text = "Guardar";
+            btnGua1.Text = "Verificar";
             btnGua1.UseVisualStyleBackColor = false;
             btnGua1.Click += btnGua1_Click;
             // 
@@ -173,6 +175,8 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(label15);
+            panel1.Controls.Add(label14);
             panel1.Controls.Add(label11);
             panel1.Controls.Add(Alumnobt);
             panel1.Controls.Add(dtFechaHasta);
@@ -213,26 +217,27 @@
             // 
             // dtFechaHasta
             // 
-            dtFechaHasta.Location = new Point(829, 280);
+            dtFechaHasta.Location = new Point(869, 280);
             dtFechaHasta.Name = "dtFechaHasta";
-            dtFechaHasta.Size = new Size(250, 27);
+            dtFechaHasta.Size = new Size(268, 27);
             dtFechaHasta.TabIndex = 95;
             // 
             // dtFechaDesde
             // 
-            dtFechaDesde.Location = new Point(829, 227);
+            dtFechaDesde.Location = new Point(869, 227);
             dtFechaDesde.Name = "dtFechaDesde";
-            dtFechaDesde.Size = new Size(250, 27);
+            dtFechaDesde.Size = new Size(268, 27);
             dtFechaDesde.TabIndex = 94;
             // 
             // RepFecha
             // 
-            RepFecha.Location = new Point(636, 227);
+            RepFecha.BackColor = Color.FromArgb(255, 255, 128);
+            RepFecha.Location = new Point(641, 227);
             RepFecha.Name = "RepFecha";
             RepFecha.Size = new Size(152, 29);
             RepFecha.TabIndex = 93;
             RepFecha.Text = "Reporte por Fecha";
-            RepFecha.UseVisualStyleBackColor = true;
+            RepFecha.UseVisualStyleBackColor = false;
             RepFecha.Click += RepFecha_Click;
             // 
             // RepVespertino
@@ -395,13 +400,83 @@
             // 
             // btnEliminar
             // 
+            btnEliminar.BackColor = Color.FromArgb(255, 255, 192);
+            btnEliminar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnEliminar.Location = new Point(417, 17);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(126, 36);
             btnEliminar.TabIndex = 4;
             btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
+            // 
+            // txtBuscar
+            // 
+            txtBuscar.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtBuscar.Location = new Point(697, 17);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.Size = new Size(213, 38);
+            txtBuscar.TabIndex = 25;
+            // 
+            // btnBuscar
+            // 
+            btnBuscar.BackColor = Color.FromArgb(255, 255, 128);
+            btnBuscar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBuscar.Location = new Point(916, 17);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(126, 36);
+            btnBuscar.TabIndex = 24;
+            btnBuscar.Text = "Buscar";
+            btnBuscar.UseVisualStyleBackColor = false;
+            btnBuscar.Click += btnBuscar_Click;
+            // 
+            // btnEditar
+            // 
+            btnEditar.BackColor = Color.FromArgb(255, 255, 192);
+            btnEditar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnEditar.Location = new Point(285, 17);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(126, 36);
+            btnEditar.TabIndex = 3;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = false;
+            btnEditar.Click += btnEditar_Click;
+            // 
+            // btnAyuda
+            // 
+            btnAyuda.BackColor = Color.FromArgb(255, 255, 192);
+            btnAyuda.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnAyuda.Location = new Point(547, 17);
+            btnAyuda.Name = "btnAyuda";
+            btnAyuda.Size = new Size(126, 36);
+            btnAyuda.TabIndex = 0;
+            btnAyuda.Text = "Ayuda";
+            btnAyuda.UseVisualStyleBackColor = false;
+            btnAyuda.Click += btnAyuda_Click;
+            // 
+            // btnNuevo2
+            // 
+            btnNuevo2.BackColor = Color.FromArgb(255, 255, 192);
+            btnNuevo2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnNuevo2.Location = new Point(153, 17);
+            btnNuevo2.Name = "btnNuevo2";
+            btnNuevo2.Size = new Size(126, 36);
+            btnNuevo2.TabIndex = 2;
+            btnNuevo2.Text = "Nuevo";
+            btnNuevo2.UseVisualStyleBackColor = false;
+            btnNuevo2.Click += btnNuevo2_Click;
+            // 
+            // btnGua2
+            // 
+            btnGua2.BackColor = Color.FromArgb(255, 255, 192);
+            btnGua2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnGua2.Location = new Point(23, 17);
+            btnGua2.Name = "btnGua2";
+            btnGua2.Size = new Size(126, 36);
+            btnGua2.TabIndex = 23;
+            btnGua2.Text = "Guardar";
+            btnGua2.UseVisualStyleBackColor = false;
+            btnGua2.Click += btnGua2_Click;
             // 
             // btnSalir2
             // 
@@ -416,51 +491,11 @@
             btnSalir2.UseVisualStyleBackColor = false;
             btnSalir2.Click += button3_Click;
             // 
-            // btnEditar
-            // 
-            btnEditar.Location = new Point(285, 17);
-            btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(126, 36);
-            btnEditar.TabIndex = 3;
-            btnEditar.Text = "Editar";
-            btnEditar.UseVisualStyleBackColor = true;
-            btnEditar.Click += btnEditar_Click;
-            // 
-            // btnAyuda
-            // 
-            btnAyuda.Location = new Point(547, 17);
-            btnAyuda.Name = "btnAyuda";
-            btnAyuda.Size = new Size(126, 36);
-            btnAyuda.TabIndex = 0;
-            btnAyuda.Text = "Ayuda";
-            btnAyuda.UseVisualStyleBackColor = true;
-            btnAyuda.Click += btnAyuda_Click;
-            // 
-            // btnNuevo2
-            // 
-            btnNuevo2.Location = new Point(153, 17);
-            btnNuevo2.Name = "btnNuevo2";
-            btnNuevo2.Size = new Size(126, 36);
-            btnNuevo2.TabIndex = 2;
-            btnNuevo2.Text = "Nuevo";
-            btnNuevo2.UseVisualStyleBackColor = true;
-            btnNuevo2.Click += btnNuevo2_Click;
-            // 
-            // btnGua2
-            // 
-            btnGua2.Location = new Point(23, 17);
-            btnGua2.Name = "btnGua2";
-            btnGua2.Size = new Size(126, 36);
-            btnGua2.TabIndex = 23;
-            btnGua2.Text = "Guardar";
-            btnGua2.UseVisualStyleBackColor = true;
-            btnGua2.Click += btnGua2_Click;
-            // 
             // panel5
             // 
             panel5.BackColor = Color.White;
             panel5.Controls.Add(label1);
-            panel5.Location = new Point(383, 12);
+            panel5.Location = new Point(396, 12);
             panel5.Name = "panel5";
             panel5.Size = new Size(566, 68);
             panel5.TabIndex = 78;
@@ -627,24 +662,23 @@
             panel7.Size = new Size(147, 71);
             panel7.TabIndex = 79;
             // 
-            // txtBuscar
+            // label14
             // 
-            txtBuscar.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtBuscar.Location = new Point(697, 17);
-            txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(213, 38);
-            txtBuscar.TabIndex = 25;
+            label14.AutoSize = true;
+            label14.Location = new Point(807, 232);
+            label14.Name = "label14";
+            label14.Size = new Size(54, 20);
+            label14.TabIndex = 98;
+            label14.Text = "Desde:";
             // 
-            // btnBuscar
+            // label15
             // 
-            btnBuscar.BackColor = Color.FromArgb(255, 255, 128);
-            btnBuscar.Location = new Point(916, 17);
-            btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(126, 36);
-            btnBuscar.TabIndex = 24;
-            btnBuscar.Text = "Buscar";
-            btnBuscar.UseVisualStyleBackColor = false;
-            btnBuscar.Click += btnBuscar_Click;
+            label15.AutoSize = true;
+            label15.Location = new Point(811, 285);
+            label15.Name = "label15";
+            label15.Size = new Size(50, 20);
+            label15.TabIndex = 99;
+            label15.Text = "Hasta:";
             // 
             // Form1
             // 
@@ -733,5 +767,7 @@
         private Button RepFecha;
         private Button Alumnobt;
         private Label label11;
+        private Label label15;
+        private Label label14;
     }
 }
