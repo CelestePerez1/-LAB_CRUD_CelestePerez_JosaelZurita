@@ -725,71 +725,76 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
         {
             try
             {
-                // 1. OBTENER Y AJUSTAR LOS VALORES DE FECHA
-                DateTime fechaDesde = dtFechaDesde.Value.Date;
+                DateTime desde = dtFechaDesde.Value.Date;
+                DateTime hasta = dtFechaHasta.Value.Date.AddDays(1).AddSeconds(-1); // incluir todo el día
 
-                // Se ajusta para incluir TODO el día seleccionado en dtFechaHasta.
-                DateTime fechaHastaFiltro = dtFechaHasta.Value.Date.AddDays(1).AddMilliseconds(-1);
-
-                if (fechaDesde > fechaHastaFiltro)
-                {
-                    MessageBox.Show("La fecha 'Desde' no puede ser posterior a la fecha 'Hasta'.", "Advertencia",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // 2. PREPARAR Y CARGAR DATOS (FILTRADO Y CONSISTENTE)
                 DBAlumnosDataSet ds = new DBAlumnosDataSet();
                 DBAlumnosDataSetTableAdapters.AlumnosTableAdapter adapter =
                     new DBAlumnosDataSetTableAdapters.AlumnosTableAdapter();
 
-                // *** LLAMADA CRÍTICA: Llenado con filtro ***
-                adapter.FillByFecha(ds.Alumnos, fechaDesde, fechaHastaFiltro);
+                // Llenar por rango de fechas
+                adapter.FillByFecha(ds.Alumnos, desde, hasta);
 
-                // 3. CONFIGURAR Y ENVIAR PARÁMETROS AL REPORTE
-                string reportFileName = "ReportFecha.rdlc";
-                string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, reportFileName);
-
-                if (!File.Exists(reportPath))
+                if (ds.Alumnos.Count == 0)
                 {
-                    MessageBox.Show("Error: El archivo de reporte no se encontró. Revise las propiedades del archivo RDL.", "Error de Archivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No hay registros en ese rango de fechas.",
+                        "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                LocalReport localReport = new LocalReport();
-                localReport.ReportPath = reportPath;
-                localReport.DataSources.Clear();
+                string reportPath = Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "ReportFechas.rdlc"
+                );
 
-                // El reporte recibe la fuente de datos que *YA ESTÁ FILTRADA*
-                localReport.DataSources.Add(new ReportDataSource("DBAlumnosDataSet", ds.Alumnos.DefaultView));
+                if (!File.Exists(reportPath))
+                {
+                    MessageBox.Show("No se encontró ReportFechas.rdlc.\nConfigúralo como 'Copiar siempre'.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-                // Pasamos las fechas como string para el TÍTULO
-                ReportParameter[] parameters = new ReportParameter[2];
-                parameters[0] = new ReportParameter("FechaDesde", fechaDesde.ToShortDateString());
-                parameters[1] = new ReportParameter("FechaHasta", dtFechaHasta.Value.ToShortDateString());
-                localReport.SetParameters(parameters);
+                LocalReport lr = new LocalReport();
+                lr.ReportPath = reportPath;
 
-                // 4. Renderizar y Abrir PDF
-                byte[] reportBytes = localReport.Render("PDF");
-                string tempPdfPath = Path.Combine(Path.GetTempPath(), $"ReporteFechas_{DateTime.Now:yyyyMMddHHmmss}.pdf");
-                File.WriteAllBytes(tempPdfPath, reportBytes);
+                // Nombre EXACTO del DataSet que usa el RDLC
+                ReportDataSource rds = new ReportDataSource("DBAlumnosDataSet", ds.Alumnos.DefaultView);
+
+                lr.DataSources.Clear();
+                lr.DataSources.Add(rds);
+
+                // Parámetros opcionales para que se muestren en el RDLC
+                ReportParameter[] parametros = new ReportParameter[]
+                {
+            new ReportParameter("Desde", desde.ToString("yyyy-MM-dd")),
+            new ReportParameter("Hasta", hasta.ToString("yyyy-MM-dd"))
+                };
+
+                lr.SetParameters(parametros);
+
+                // Renderizar PDF
+                byte[] bytes = lr.Render("PDF");
+
+                string pdfPath = Path.Combine(
+                    Path.GetTempPath(),
+                    $"ReporteFechas_{DateTime.Now:yyyyMMddHHmmss}.pdf"
+                );
+
+                File.WriteAllBytes(pdfPath, bytes);
 
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = tempPdfPath,
+                    FileName = pdfPath,
                     UseShellExecute = true
                 });
 
-                MessageBox.Show("Reporte por rango de fechas generado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Reporte generado correctamente.",
+                    "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                string errorMessage = $"Error: {ex.Message}";
-                if (ex.InnerException != null)
-                {
-                    errorMessage += $"\nDetalle: {ex.InnerException.Message}";
-                }
-                MessageBox.Show(errorMessage, "Error de Reporte", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al generar el reporte:\n{ex.Message}\n\n{ex.StackTrace}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
