@@ -725,66 +725,70 @@ namespace RegistroAlumnos_CelestePerezJosaelZurita
         {
             try
             {
+                // Rango corregido para incluir el día completo
                 DateTime desde = dtFechaDesde.Value.Date;
-                DateTime hasta = dtFechaHasta.Value.Date.AddDays(1).AddSeconds(-1); // incluir todo el día
+                DateTime hasta = dtFechaHasta.Value.Date.AddDays(1).AddMilliseconds(-1);
 
+                // Crear el DataSet y el TableAdapter
                 DBAlumnosDataSet ds = new DBAlumnosDataSet();
                 DBAlumnosDataSetTableAdapters.AlumnosTableAdapter adapter =
                     new DBAlumnosDataSetTableAdapters.AlumnosTableAdapter();
 
-                // Llenar por rango de fechas
+                // Llenar DataSet con el método FillByFecha
                 adapter.FillByFecha(ds.Alumnos, desde, hasta);
 
+                // Validar si hay resultados
                 if (ds.Alumnos.Count == 0)
                 {
-                    MessageBox.Show("No hay registros en ese rango de fechas.",
-                        "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No existen alumnos registrados en este rango de fechas.",
+                        "Sin datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
+                // Ruta del archivo RDLC
                 string reportPath = Path.Combine(
                     AppDomain.CurrentDomain.BaseDirectory,
-                    "ReportFechas.rdlc"
+                    "ReportFecha.rdlc"
                 );
 
+                // Verificar la existencia del reporte
                 if (!File.Exists(reportPath))
                 {
-                    MessageBox.Show("No se encontró ReportFechas.rdlc.\nConfigúralo como 'Copiar siempre'.",
+                    MessageBox.Show($"No se encontró el archivo:\n{reportPath}\n" +
+                        "Asegúrate de que ReportFecha.rdlc esté marcado como 'Copiar siempre'.",
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                LocalReport lr = new LocalReport();
-                lr.ReportPath = reportPath;
+                // Crear el LocalReport
+                LocalReport reporte = new LocalReport();
+                reporte.ReportPath = reportPath;
 
-                // Nombre EXACTO del DataSet que usa el RDLC
-                ReportDataSource rds = new ReportDataSource("DBAlumnosDataSet", ds.Alumnos.DefaultView);
+                // Crear la fuente de datos del reporte
+                ReportDataSource rds = new ReportDataSource(
+                    "DBAlumnosDataSet",
+                    ds.Alumnos.DefaultView
+                );
 
-                lr.DataSources.Clear();
-                lr.DataSources.Add(rds);
+                reporte.DataSources.Clear();
+                reporte.DataSources.Add(rds);
 
-                // Parámetros opcionales para que se muestren en el RDLC
-                ReportParameter[] parametros = new ReportParameter[]
-                {
-            new ReportParameter("Desde", desde.ToString("yyyy-MM-dd")),
-            new ReportParameter("Hasta", hasta.ToString("yyyy-MM-dd"))
-                };
+                // Renderizar a PDF (sin parámetros porque el RDLC no los usa)
+                byte[] bytes = reporte.Render("PDF");
 
-                lr.SetParameters(parametros);
-
-                // Renderizar PDF
-                byte[] bytes = lr.Render("PDF");
-
-                string pdfPath = Path.Combine(
+                // Ruta del archivo PDF temporal
+                string archivoPDF = Path.Combine(
                     Path.GetTempPath(),
                     $"ReporteFechas_{DateTime.Now:yyyyMMddHHmmss}.pdf"
                 );
 
-                File.WriteAllBytes(pdfPath, bytes);
+                // Guardar PDF
+                File.WriteAllBytes(archivoPDF, bytes);
 
+                // Abrir PDF
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = pdfPath,
+                    FileName = archivoPDF,
                     UseShellExecute = true
                 });
 

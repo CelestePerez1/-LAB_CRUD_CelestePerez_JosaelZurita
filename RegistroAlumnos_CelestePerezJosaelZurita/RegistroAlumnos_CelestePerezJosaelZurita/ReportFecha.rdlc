@@ -490,7 +490,7 @@
         </TablixRowHierarchy>
         <DataSetName>DBAlumnosDataSet</DataSetName>
         <Top>3.3147cm</Top>
-        <Left>3.37587cm</Left>
+        <Left>2.2917cm</Left>
         <Height>1.2cm</Height>
         <Width>16.18767cm</Width>
         <Style>
@@ -509,6 +509,7 @@
                 <Value>Reporte de alumnos registrados en un rango de fechas</Value>
                 <Style>
                   <FontFamily>Arial Black</FontFamily>
+                  <FontSize>14pt</FontSize>
                   <Color>#4169e1</Color>
                 </Style>
               </TextRun>
@@ -517,10 +518,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>0.6477cm</Top>
-        <Left>5.87587cm</Left>
-        <Height>0.6cm</Height>
-        <Width>12.10967cm</Width>
+        <Top>0.61242cm</Top>
+        <Left>2.59504cm</Left>
+        <Height>0.76933cm</Height>
+        <Width>15.6445cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -547,10 +548,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox14</rd:DefaultName>
-        <Top>1.42409cm</Top>
-        <Left>8.37587cm</Left>
+        <Top>1.55814cm</Top>
+        <Left>7.8867cm</Left>
         <Height>0.6cm</Height>
-        <Width>5.01883cm</Width>
+        <Width>5.52683cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -573,25 +574,23 @@
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Textbox Name="PageName">
+        <Textbox Name="PageNumber">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=Globals!PageName</Value>
-                  <Style>
-                    <FontWeight>Bold</FontWeight>
-                  </Style>
+                  <Value>=Globals!PageNumber</Value>
+                  <Style />
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>PageName</rd:DefaultName>
-          <Top>1.00753cm</Top>
-          <Left>9.7917cm</Left>
+          <rd:DefaultName>PageNumber</rd:DefaultName>
+          <Top>1.3462cm</Top>
+          <Left>9.30487cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <Style>
@@ -611,8 +610,8 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
+    <PageHeight>18cm</PageHeight>
+    <PageWidth>24cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
     <TopMargin>2cm</TopMargin>

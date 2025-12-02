@@ -1211,12 +1211,11 @@ SELECT Id, Nombre, Cedula, Carrera, Semestre, Jornada, Usuario, Contrasena, Reci
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT Id, Nombre, Cedula, Carrera, Semestre, Jornada, Usuario, Contrasena, Recib" +
-                "irNotificaciones, FechaRegistro \r\nFROM dbo.Alumnos \r\nWHERE FechaRegistro >= @Fec" +
-                "haDesde AND FechaRegistro <= @FechaHasta";
+            this._commandCollection[1].CommandText = "SELECT * FROM Alumnos\r\nWHERE FechaRegistro BETWEEN @Desde AND @Hasta\r\nORDER BY Fe" +
+                "chaRegistro ASC;";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaDesde", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "FechaRegistro", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaHasta", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "FechaRegistro", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Desde", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "FechaRegistro", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Hasta", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "FechaRegistro", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
             this._commandCollection[2].CommandText = "SELECT * FROM Alumnos WHERE ID = @ID";
@@ -1258,16 +1257,16 @@ SELECT Id, Nombre, Cedula, Carrera, Semestre, Jornada, Usuario, Contrasena, Reci
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByFecha(DBAlumnosDataSet.AlumnosDataTable dataTable, global::System.Nullable<global::System.DateTime> FechaDesde, global::System.Nullable<global::System.DateTime> FechaHasta) {
+        public virtual int FillByFecha(DBAlumnosDataSet.AlumnosDataTable dataTable, global::System.Nullable<global::System.DateTime> Desde, global::System.Nullable<global::System.DateTime> Hasta) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            if ((FechaDesde.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(FechaDesde.Value));
+            if ((Desde.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(Desde.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
-            if ((FechaHasta.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(FechaHasta.Value));
+            if ((Hasta.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(Hasta.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
@@ -1283,16 +1282,16 @@ SELECT Id, Nombre, Cedula, Carrera, Semestre, Jornada, Usuario, Contrasena, Reci
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DBAlumnosDataSet.AlumnosDataTable GetDataByFecha(global::System.Nullable<global::System.DateTime> FechaDesde, global::System.Nullable<global::System.DateTime> FechaHasta) {
+        public virtual DBAlumnosDataSet.AlumnosDataTable GetDataByFecha(global::System.Nullable<global::System.DateTime> Desde, global::System.Nullable<global::System.DateTime> Hasta) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            if ((FechaDesde.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(FechaDesde.Value));
+            if ((Desde.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(Desde.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
-            if ((FechaHasta.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(FechaHasta.Value));
+            if ((Hasta.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(Hasta.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
